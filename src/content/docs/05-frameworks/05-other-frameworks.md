@@ -3,6 +3,12 @@ title: "其他 Agent 框架"
 description: "CrewAI、AutoGen、Semantic Kernel、Strands Agents 等框架概览"
 ---
 
+:::tip[与其他章节的关联]
+- CrewAI 和 AutoGen 实现了 [ch02 多 Agent 协作模式](/02-agent-basics/02-agent-patterns/) 中的不同编排策略
+- Semantic Kernel 的 Plugin 架构类似 [ch03 工具调用](/03-tools-mcp/01-tool-calling/) 中的工具定义模式
+- 各框架均可集成 [ch04 RAG](/04-rag/02-rag-basics/) 能力用于知识增强
+:::
+
 ## CrewAI：角色扮演多 Agent
 
 CrewAI 的核心理念是**让多个 Agent 像一个团队一样协作**。每个 Agent 扮演特定角色（Role），拥有明确的目标（Goal）和背景故事（Backstory）。
@@ -77,6 +83,10 @@ user_proxy.initiate_chat(
 
 ## Semantic Kernel：微软企业级
 
+:::note[术语：Semantic Kernel]
+Semantic Kernel 是微软的开源 AI 编排框架，核心理念是将传统软件工程的 Plugin/函数调用模式与 LLM 能力融合。它同时支持 C#、Python 和 Java，是微软企业生态（Azure OpenAI、Microsoft 365）中的首选 AI 框架。
+:::
+
 Semantic Kernel 是微软面向企业的 AI 编排框架，同时支持 C#、Python 和 Java。设计理念是将传统软件工程与 AI 能力无缝融合。
 
 ```python
@@ -140,25 +150,32 @@ print(response)
 | **Semantic Kernel** | 微软企业级，多语言支持 |
 | **Strands Agents** | AWS 极简框架，model-driven 理念 |
 
-## 自测问题
+## 常见陷阱
 
-<details>
-<summary>1. CrewAI 和 AutoGen 在多 Agent 协作方式上有什么本质区别？</summary>
+- **CrewAI 角色设计过于笼统**：backstory 写得太简单（如「你是专家」），Agent 行为不可控。应提供具体的领域知识、输出格式要求和约束条件。
+- **AutoGen 对话失控**：Agent 之间对话可能陷入无意义的来回讨论。需要合理设置 `max_consecutive_auto_reply` 和明确的终止条件。
+- **框架选择焦虑**：花大量时间对比框架而不动手。建议先用最简单的方案跑通 MVP，再根据实际瓶颈决定是否换框架。
 
-CrewAI 基于任务委派——每个 Agent 有明确的角色和任务，按依赖关系顺序执行。AutoGen 基于对话——Agent 之间通过对话交换信息，更灵活但也更难控制。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：CrewAI 和 AutoGen 在多 Agent 协作方式上有什么本质区别？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">CrewAI 基于任务委派——每个 Agent 有明确的角色和任务，按依赖关系顺序执行。AutoGen 基于对话——Agent 之间通过对话交换信息，更灵活但也更难控制。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. 如果你的公司重度使用 Azure，应该优先考虑哪个框架？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：如果你的公司重度使用 Azure，应该优先考虑哪个框架？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">Semantic Kernel，因为它与 Azure 生态深度集成、支持 C#/Java/Python 多语言、符合企业安全合规要求。</div>
+  </details>
+</div>
 
-Semantic Kernel，因为它与 Azure 生态深度集成、支持 C#/Java/Python 多语言、符合企业安全合规要求。
-</details>
-
-<details>
-<summary>3. Strands Agents 的 "model-driven" 理念是什么意思？</summary>
-
-指让 LLM 自主决定执行流程和工具使用，框架不预设固定的执行路径。这与 LangGraph 等需要预先定义图结构的框架形成对比。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Strands Agents 的 "model-driven" 理念是什么意思？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">指让 LLM 自主决定执行流程和工具使用，框架不预设固定的执行路径。这与 LangGraph 等需要预先定义图结构的框架形成对比。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 

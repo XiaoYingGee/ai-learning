@@ -3,6 +3,12 @@ title: "Agent 记忆系统"
 description: "理解 Agent 的三种记忆类型、读写机制、压缩与遗忘策略"
 ---
 
+:::tip[与其他章节的关联]
+- 记忆系统中的长期记忆依赖 **Embedding**（详见 [ch01 Embedding 原理](/01-llm-basics/03-embedding-tokenization/)）将信息转为向量存储
+- 工作记忆是 Agent 执行 [ch02 中介绍的 ReAct/规划模式](/02-agent-basics/02-agent-patterns/) 的基础组件
+- 长期记忆的向量检索机制与 [ch04-02 RAG 基础](/04-rag/02-rag-basics/) 高度相关
+:::
+
 ## Agent 为什么需要记忆
 
 想象一个没有记忆的助手：每次你跟他说话，他都不记得之前聊过什么。你说「我叫小明」，下一轮他就忘了你是谁。这就是没有记忆系统的 LLM 的状态。
@@ -23,6 +29,9 @@ Agent 的记忆系统解决三个核心问题：
   <div style="border:2px solid #f97316;border-radius:12px;padding:1rem 1.5rem;">
     <div style="font-weight:bold;color:#f97316;">工作记忆 Working</div>
     <div style="font-size:.9rem;">生命周期：当前任务 · 类比：便利贴上的待办清单 · 实现：Scratchpad / 状态变量</div>
+    :::note[术语：Scratchpad]
+    Scratchpad（草稿本/暂存区）是 Agent 在执行任务过程中用于记录中间推理步骤、临时结果和待办事项的可读写工作区。与对话历史不同，Scratchpad 由 Agent 主动维护，任务结束后通常被清除。
+    :::
   </div>
   <div style="border:2px solid #22c55e;border-radius:12px;padding:1rem 1.5rem;">
     <div style="font-weight:bold;color:#22c55e;">长期记忆 Long-term</div>
@@ -130,19 +139,32 @@ def compress_conversation(messages: list, model="gpt-4o-mini") -> str:
 
 ---
 
-<details>
-<summary><strong>自测题</strong></summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：短期记忆的局限是什么？如何解决？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">受 Context Window 大小限制。通过摘要压缩、滑动窗口或长期记忆检索来解决。</div>
+  </details>
+</div>
 
-1. **短期记忆的局限是什么？如何解决？**
-   - 答：受 Context Window 大小限制。通过摘要压缩、滑动窗口或长期记忆检索来解决。
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：工作记忆和长期记忆的生命周期有什么区别？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">工作记忆只存在于当前任务期间，任务完成即清除；长期记忆跨会话持久化，永久保存。</div>
+  </details>
+</div>
 
-2. **工作记忆和长期记忆的生命周期有什么区别？**
-   - 答：工作记忆只存在于当前任务期间，任务完成即清除；长期记忆跨会话持久化，永久保存。
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么需要「遗忘策略」？全部记住不好吗？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">Context Window 有限，全部注入会超出限制且增加成本和延迟。另外旧信息可能已过时，需要定期清理。</div>
+  </details>
+</div>
 
-3. **为什么需要「遗忘策略」？全部记住不好吗？**
-   - 答：Context Window 有限，全部注入会超出限制且增加成本和延迟。另外旧信息可能已过时，需要定期清理。
+## 常见陷阱
 
-</details>
+- **记忆爆炸**：不加选择地将所有对话存入长期记忆，导致检索噪音越来越大。应设置写入门槛和定期清理机制。
+- **摘要失真**：用 LLM 压缩对话时可能丢失关键细节（如具体数字、日期）。建议对关键事实使用结构化提取而非自由摘要。
+- **检索时机错误**：每轮都检索长期记忆会增加延迟和成本。应根据用户输入的语义判断是否需要检索。
 
 ## 延伸阅读
 

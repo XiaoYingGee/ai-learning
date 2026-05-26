@@ -3,6 +3,12 @@ title: "Agentic RAG：自主检索的智能体"
 description: "理解 Agentic RAG 与传统 RAG 的区别，掌握路由式和迭代式 RAG 的实现"
 ---
 
+:::tip[与其他章节的关联]
+- Agentic RAG 直接应用 [ch02 Agent 模式](/02-agent-basics/02-agent-patterns/) 中的 ReAct 和规划模式来驱动检索决策
+- 路由式和迭代式 RAG 是 [ch02 编排模式](/02-agent-basics/02-agent-patterns/) 在检索场景的具体应用
+- 多个框架已内置 Agentic RAG 支持，参见 [ch05 LangChain](/05-frameworks/01-langchain-langgraph/) 和 [ch05 Claude Agent SDK](/05-frameworks/02-claude-agent-sdk/)
+:::
+
 ## 什么是 Agentic RAG
 
 传统 RAG 是一条固定流水线：问题进来 → 检索 → 生成。无论问题是什么，都走同样的流程。
@@ -146,26 +152,66 @@ def agentic_rag(question: str, max_iterations: int = 3) -> str:
 
 Agentic RAG 是 2025-2026 年 AI Engineer 面试的热门话题：
 
-1. **与传统 RAG 的本质区别** —— 决策权从固定流程转移到 Agent
-2. **何时使用 Agentic RAG** —— 多数据源、查询复杂度变化大、需要多步推理
-3. **成本权衡** —— Agentic RAG 的 LLM 调用次数更多，需要考虑延迟和成本
-4. **评估方法** —— 用 Recall、Precision、Answer Relevancy 等指标评估各环节
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Agentic RAG 与传统 RAG 的本质区别是什么？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">决策权从固定流程转移到 Agent。传统 RAG 每次都走「检索→生成」的固定管线；Agentic RAG 由 Agent 自主决定是否检索、检索哪个数据源、结果是否足够、是否需要重新检索。</div>
+  </details>
+</div>
+
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 何时使用 Agentic RAG 而非传统 RAG？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">多数据源、查询复杂度变化大、需要多步推理的场景。如果查询模式单一且数据源固定，传统 RAG 更简单可靠。</div>
+  </details>
+</div>
+
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Agentic RAG 的成本如何权衡？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">Agentic RAG 的 LLM 调用次数更多（路由判断、结果评估、查询改写），需要考虑延迟和成本。可通过设置最大迭代次数、使用小模型做路由/评估来控制。</div>
+  </details>
+</div>
+
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 如何评估 Agentic RAG 的效果？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">分环节评估：检索用 Recall@K / MRR / NDCG（参见 <a href="/04-rag/04-advanced-rag/">ch04-04 评估指标</a>），生成用 Answer Relevancy / Faithfulness，整体用端到端准确率。</div>
+  </details>
+</div>
 
 ---
 
-<details>
-<summary><strong>自测题</strong></summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Agentic RAG 比传统 RAG 多了哪些决策能力？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">是否需要检索、检索哪个数据源、检索结果是否足够、是否需要改写查询重新检索。</div>
+  </details>
+</div>
 
-1. **Agentic RAG 比传统 RAG 多了哪些决策能力？**
-   - 答：是否需要检索、检索哪个数据源、检索结果是否足够、是否需要改写查询重新检索。
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：路由式 RAG 和迭代式 RAG 分别解决什么问题？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">路由式解决「查哪里」的问题（多数据源选择）；迭代式解决「查到没有」的问题（结果质量评估和反复检索）。</div>
+  </details>
+</div>
 
-2. **路由式 RAG 和迭代式 RAG 分别解决什么问题？**
-   - 答：路由式解决「查哪里」的问题（多数据源选择）；迭代式解决「查到没有」的问题（结果质量评估和反复检索）。
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Agentic RAG 的主要缺点是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">LLM 调用次数增多导致延迟增加和成本上升；Agent 的决策本身可能出错（如错误路由、不必要的重复检索）。</div>
+  </details>
+</div>
 
-3. **Agentic RAG 的主要缺点是什么？**
-   - 答：LLM 调用次数增多导致延迟增加和成本上升；Agent 的决策本身可能出错（如错误路由、不必要的重复检索）。
+## 常见陷阱
 
-</details>
+- **无限循环检索**：迭代式 RAG 中 Agent 反复判断「结果不足」并重新检索，陷入死循环。务必设置 `max_iterations` 上限。
+- **路由判断不稳定**：同一问题多次请求可能被路由到不同数据源。建议用 few-shot examples 在路由 prompt 中提供示例，或用 temperature=0 减少随机性。
+- **评估环节成为瓶颈**：用大模型（如 GPT-4o）做结果质量评估会显著增加延迟。可用小模型（如 GPT-4o-mini）做评估，或用简单规则（如检索得分阈值）替代。
 
 ## 延伸阅读
 

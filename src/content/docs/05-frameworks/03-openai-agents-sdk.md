@@ -3,6 +3,13 @@ title: "OpenAI Agents SDK"
 description: "OpenAI Agents SDK 核心概念：Agent, Handoff, Guardrail, Tracing 与 Runner 执行模型"
 ---
 
+:::tip[与其他章节的关联]
+- Agent 和 Runner 实现了 [ch02 Agent 模式](/02-agent-basics/02-agent-patterns/) 中的 Agentic Loop
+- Handoff 概念与 [ch05-02 Claude Agent SDK](/05-frameworks/02-claude-agent-sdk/) 中的 Handoff 一致
+- Guardrail 是 [ch02 Agent 安全](/02-agent-basics/02-agent-patterns/) 中「护栏」概念的框架级实现
+- Tool 定义同样基于 [ch03 工具调用](/03-tools-mcp/01-tool-calling/) 中的 JSON Schema 规范
+:::
+
 ## 概述
 
 OpenAI Agents SDK（原 Swarm 的正式演进版）是 OpenAI 推出的轻量级多 Agent 编排框架。它的设计理念与 Claude Agent SDK 类似——**尽可能少的抽象，尽可能多的控制**。
@@ -135,25 +142,32 @@ Runner 的内部循环：
 | 内置 Tracing | 有 | 无 | 需 LangSmith |
 | 多 Agent Handoff | 原生支持 | 原生支持 | 通过 LangGraph |
 
-## 自测问题
+## 常见陷阱
 
-<details>
-<summary>1. Guardrail 的 tripwire_triggered 设为 True 时会发生什么？</summary>
+- **Guardrail 过度触发**：输入护栏的检测 Agent 如果过于敏感，会误拦正常请求。建议用真实数据调试 Guardrail 的误报率。
+- **Tracing 数据量爆炸**：生产环境中每次调用都记录完整 Tracing，存储成本和性能影响不可忽视。可配置采样率或只记录异常调用。
+- **Handoff 上下文丢失**：Handoff 到新 Agent 时，原始对话历史可能超出 Context Window。需要在 Handoff 时做上下文摘要。
 
-SDK 会立即中断 Agent 的执行流程并抛出异常，阻止潜在的不安全操作继续执行。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Guardrail 的 tripwire_triggered 设为 True 时会发生什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">SDK 会立即中断 Agent 的执行流程并抛出异常，阻止潜在的不安全操作继续执行。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. Runner 的三种运行模式分别适用于什么场景？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Runner 的三种运行模式分别适用于什么场景？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">run_sync 适合脚本和简单场景；run 适合异步 Web 服务；run_streamed 适合需要实时展示中间结果的聊天界面。</div>
+  </details>
+</div>
 
-`run_sync` 适合脚本和简单场景；`run` 适合异步 Web 服务；`run_streamed` 适合需要实时展示中间结果的聊天界面。
-</details>
-
-<details>
-<summary>3. Agent 的 Handoff 和直接调用另一个 Agent 的工具有什么区别？</summary>
-
-Handoff 是控制权的完全转移，目标 Agent 接管后续所有交互；而调用工具只是临时借用能力，控制权仍在当前 Agent。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Agent 的 Handoff 和直接调用另一个 Agent 的工具有什么区别？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">Handoff 是控制权的完全转移，目标 Agent 接管后续所有交互；而调用工具只是临时借用能力，控制权仍在当前 Agent。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 
