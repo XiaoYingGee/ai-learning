@@ -7,6 +7,10 @@ description: "LLM 如何一步步生成文本：Greedy Decoding、Temperature、
 
 大语言模型每次只生成**一个 token**。模型输出的是词表中每个 token 的概率分布，然后通过某种策略从中选择一个 token 作为输出。这个选择策略就是**解码策略（Decoding Strategy）**。
 
+:::note[术语：Logits]
+Logits 是模型输出的原始未归一化分数——词表中每个 token 都有一个 logit 值，值越大表示模型认为该 token 越可能是下一个词。Logits 经过 Softmax 后才变成概率分布。
+:::
+
 ```
 输入: "今天天气"
 
@@ -38,6 +42,10 @@ def greedy_decode(model, input_ids, max_length):
 
 **优点**：确定性输出，速度快。
 **缺点**：生成内容单调重复，容易陷入局部最优。同样的输入永远产生同样的输出。
+
+:::note[术语：EOS]
+EOS（End of Sequence）是一个特殊的 token，表示序列结束。当模型生成 EOS 时，表示它认为回答已经完成，应该停止继续生成。
+:::
 
 ## Temperature（温度）
 
@@ -138,23 +146,35 @@ Step 2:  "天气" → "天气很"(0.4×0.5) / "天气不"(0.4×0.3)
 
 **注意**：不同 API 的参数组合方式不同。OpenAI 建议只调 Temperature 或 Top-p 之一，不要同时调。Claude API 默认 Temperature=1，Top-p=0.999。
 
-<details>
-<summary>自测题 1：Temperature=0 和 Greedy Decoding 有什么关系？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Temperature=0 和 Greedy Decoding 有什么关系？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      Temperature=0 时，Softmax 输出趋近 one-hot 分布——概率最高的 token 概率趋近 1，其余趋近 0，效果完全等同于 Greedy Decoding（每步选概率最大的 token）。实际实现中 T=0 通常直接用 argmax 跳过 Softmax 计算。<br/><br/>
+      可以这样理解：Temperature 就像一个"冒险开关"。T=0 是最保守的设定，模型永远选最有把握的答案；T 越高，模型越愿意尝试低概率但可能更有创意的选项。
+    </div>
+  </details>
+</div>
 
-Temperature=0 时，softmax 输出趋近 one-hot 分布（概率最高的 token 概率趋近 1），效果等同于 Greedy Decoding。实际实现中 T=0 通常直接用 argmax。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么 Top-p 比 Top-k 更优？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      Top-k 使用固定的候选数量（如 k=50），无法适应不同位置上概率分布的差异。比如在"中华人民共和____"这个位置，合理的下一个字只有"国"，但 k=50 会强行保留 50 个候选，引入大量噪声。<br/><br/>
+      Top-p 根据累计概率动态调整候选集大小：模型很确信时（概率集中在少数 token 上），候选集自动缩小到 1-2 个；模型不确定时（概率分散），候选集自动扩大。这种自适应机制让采样质量更稳定，是目前大多数 API 的默认策略。
+    </div>
+  </details>
+</div>
 
-<details>
-<summary>自测题 2：为什么 Top-p 比 Top-k 更优？</summary>
-
-Top-k 使用固定的候选数量，无法适应不同位置上概率分布的差异。Top-p 根据累计概率动态调整候选集大小，当模型确信时自动收窄选择范围，不确信时自动扩大，更加灵活合理。
-</details>
-
-<details>
-<summary>自测题 3：为什么代码生成任务通常用低 Temperature？</summary>
-
-代码有严格的语法规则，一个错误的 token 就可能导致整个程序无法运行。低 Temperature 让模型更倾向于选择概率最高（最可能正确）的 token，减少随机性带来的语法错误。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么代码生成任务通常用低 Temperature？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      代码有严格的语法规则，一个错误的 token（比如少一个括号、用错一个关键字）就可能导致整个程序无法运行。低 Temperature 让模型更倾向于选择概率最高（最可能正确）的 token，减少随机性带来的语法错误。<br/><br/>
+      此外，代码任务通常有明确的"正确答案"，不需要创造性——<code>for i in range(10)</code> 就是比 <code>for i in range(9+1)</code> 更好的写法。而创意写作则相反，需要高 Temperature 来避免千篇一律的表达。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 

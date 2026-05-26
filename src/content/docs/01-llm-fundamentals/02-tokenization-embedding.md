@@ -176,23 +176,35 @@ Agent 利用 Embedding 实现：
 
 常用 Embedding 模型：OpenAI `text-embedding-3-small`、`BAAI/bge-m3`、`Cohere embed-v3`。
 
-<details>
-<summary>自测题 1：为什么 BPE 不会遇到 OOV 问题？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么 BPE 不会遇到 OOV 问题？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      BPE 的最小粒度是单个字节（或字符），这意味着任何文本都可以被表示。即使遇到从未见过的词（比如新造的品牌名"Xyloquz"），BPE 也会把它拆分为更小的已知子词或字符来表示。最极端的情况是每个字符各占一个 token，虽然效率低但绝不会出现"词表里没有"的情况。<br/><br/>
+      相比之下，传统词表方法（如 Word2Vec）使用固定词表，遇到未登录词就只能用一个通用的 [UNK] 标记替代，丢失了所有信息。
+    </div>
+  </details>
+</div>
 
-BPE 的最小粒度是单个字节（或字符）。即使遇到从未见过的词，也可以把它拆分为更小的已知子词或字符来表示。最极端的情况是把每个字符当作一个 token。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么中文比英文消耗更多 token？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      大多数 LLM 的 tokenizer 以英文语料为主训练，英文常见词（如"the"、"and"）被高频合并为单个 token。而中文字符在训练语料中出现频率相对较低，往往需要多个 token 来表示一个汉字。<br/><br/>
+      从编码层面看，UTF-8 下一个汉字占 3 个字节，而一个英文字母只占 1 个字节。这意味着同样的语义内容，中文在底层就需要更多的字节来表示。实际测试中，同样含义的一段话，中文版通常比英文版多消耗 30%-100% 的 token，直接影响 API 费用和上下文窗口利用率。
+    </div>
+  </details>
+</div>
 
-<details>
-<summary>自测题 2：为什么中文比英文消耗更多 token？</summary>
-
-大多数 LLM 的 tokenizer 以英文语料为主训练，英文常见词被合并为单个 token。而中文字符在训练语料中出现频率相对较低，往往需要多个 token 来表示一个汉字（尤其是 UTF-8 编码下一个汉字占 3 个字节）。
-</details>
-
-<details>
-<summary>自测题 3：Embedding 向量的维度越高越好吗？</summary>
-
-不一定。更高维度可以表达更丰富的语义信息，但也带来更大的存储和计算开销。实际中需要在表达能力和效率之间权衡。OpenAI 的 text-embedding-3 系列支持通过 `dimensions` 参数动态调整维度。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Embedding 向量的维度越高越好吗？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      不一定。更高维度可以表达更丰富的语义细节，但也带来更大的存储和计算开销——向量数据库的索引大小、相似度计算的速度都会受影响。<br/><br/>
+      例如，OpenAI 的 text-embedding-3-small 默认 1536 维，但通过 <code>dimensions</code> 参数降到 256 维后，在很多检索任务上性能只下降几个百分点，而存储和计算成本降低了 6 倍。实际项目中需要根据精度需求和资源预算做权衡，通常先用默认维度跑基线，再尝试降维看效果损失是否可接受。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 
