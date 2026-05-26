@@ -3,6 +3,12 @@ title: "设计题：自主数据分析 Agent"
 description: "系统设计面试题 — 设计一个能自主完成数据探索、分析和可视化的 AI Agent"
 ---
 
+:::tip[与其他章节的关联]
+- **ch02 Plan-and-Execute 模式**：数据分析 Agent 的 Orchestrator 采用此模式，详见 [Agent 设计模式](/02-patterns/)
+- **ch04 RAG**：Schema 检索使用了向量搜索技术，详见 [RAG 深入](/04-rag/)
+- **ch07 生产化**：沙箱执行和成本控制的工程实践，详见 [生产化章节](/07-production/)
+:::
+
 ## 题目
 
 > 设计一个自主数据分析 Agent，用户用自然语言描述分析需求，Agent 能自动查询数据、执行分析、生成可视化图表并输出分析报告。
@@ -48,6 +54,11 @@ flowchart TD
 - 支持计划动态调整（根据中间结果修改后续步骤）
 
 **2. 数据查询 Tool**
+
+:::note[术语：Text-to-SQL]
+**Text-to-SQL** 是将自然语言查询自动转换为 SQL 语句的技术。LLM 通过理解用户意图和数据库 Schema，生成可执行的 SQL 查询。关键挑战包括 Schema 理解、复杂 JOIN、子查询生成以及防止 SQL 注入。
+:::
+
 - Text-to-SQL：将自然语言转换为 SQL 查询
 - Schema 感知：自动加载数据库的表结构、列名、数据类型
 - 查询校验：执行前检查 SQL 安全性（只允许 SELECT）

@@ -3,6 +3,16 @@ title: "设计题：智能客服多 Agent 系统"
 description: "系统设计面试题 — 设计一个支持意图路由、多 Agent 协作和人工转接的智能客服系统"
 ---
 
+:::note[术语：CSAT]
+**CSAT（Customer Satisfaction Score，客户满意度评分）** 是衡量客户对服务满意程度的核心指标。通常在对话结束后通过 1-5 分评分收集。在智能客服系统中，CSAT 是评估 Agent 质量的最终标准，直接反映 Agent 回答的准确性、态度和解决问题的效率。
+:::
+
+:::tip[与其他章节的关联]
+- **ch02 设计模式**：Multi-Agent + Router 模式的典型应用，详见 [Agent 设计模式](/02-patterns/)
+- **ch04 RAG**：FAQ Agent 依赖 RAG 检索知识库，详见 [RAG 深入](/04-rag/)
+- **ch07 Guardrails**：情绪检测和内容审核使用 Guardrails 机制，详见 [Guardrails 章节](/07-production/03-guardrails/)
+:::
+
 ## 题目
 
 > 设计一个智能客服系统，能自动处理客户咨询、支持多轮对话，并在必要时转接人工客服。

@@ -3,6 +3,14 @@ title: "核心论文"
 description: "AI Agent 领域必读论文列表，附 arXiv 链接和一句话摘要"
 ---
 
+:::tip[与其他章节的关联]
+- Attention Is All You Need → [ch01 LLM 基础](/01-llm-basics/)
+- ReAct / Reflexion / Tree of Thoughts → [ch02 Agent 设计模式](/02-patterns/)
+- Toolformer / Gorilla → [ch05 Tool Use](/05-tool-use/)
+- RAGAS → [ch04 RAG 深入](/04-rag/) 和 [ch07 评估](/07-production/)
+- Anthropic RSP → [ch08 安全](/08-security/03-responsible-ai/)
+:::
+
 ## Transformer 基础
 
 ### Attention Is All You Need

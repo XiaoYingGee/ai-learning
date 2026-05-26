@@ -3,6 +3,12 @@ title: "大学课程"
 description: "顶尖大学 AI Agent 相关课程推荐，涵盖 Berkeley、Stanford、Harvard"
 ---
 
+:::tip[与其他章节的关联]
+- Berkeley LLM Agents 课程覆盖本指南 ch01-ch08 的大部分内容，适合作为系统性补充
+- Stanford CS224G 侧重工程化落地，与 [ch07 生产化](/07-production/) 互补
+- Stanford CS329A 的自我改进主题对应 [ch02 Reflection 模式](/02-patterns/)
+:::
+
 ## Berkeley 课程
 
 ### CS294/194-196: Large Language Model Agents (Fall 2024)
@@ -65,6 +71,10 @@ description: "顶尖大学 AI Agent 相关课程推荐，涵盖 Berkeley、Stanf
 ---
 
 ### CS329T: Foundation Models and Their Applications
+
+:::note[术语：Foundation Models]
+**Foundation Models（基础模型）** 是在大规模数据上预训练的通用模型（如 GPT-4、Claude、Gemini），可以通过微调或 Prompt Engineering 适配各种下游任务。它们之所以叫"基础"，是因为整个 AI Agent 生态都建立在这些模型的能力之上——Agent 的推理、规划、工具使用能力都源于 Foundation Model 的底层能力。
+:::
 
 **简介：** 研究 Foundation Models 的能力边界和应用方法，讨论 fine-tuning、prompt engineering、以及在各领域的应用。
 

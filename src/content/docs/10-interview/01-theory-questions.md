@@ -3,6 +3,15 @@ title: "高频理论面试题"
 description: "30+ 道 AI Agent 高频理论面试题及参考答案，覆盖 LLM 基础、Agent 设计、RAG、安全和工程化"
 ---
 
+:::tip[与其他章节的关联]
+- **LLM 基础题（1-6）**：详细原理见 [ch01 LLM 基础](/01-llm-basics/)
+- **Agent 设计题（7-12）**：模式详解见 [ch02 Agent 设计模式](/02-patterns/)，记忆系统见 [ch03 记忆系统](/03-memory/)
+- **Tool Use 题（13-15）**：工具使用详见 [ch05 Tool Use](/05-tool-use/)，MCP 详见 [ch06 MCP](/06-mcp/)
+- **RAG 题（16-20）**：完整原理见 [ch04 RAG 深入](/04-rag/)
+- **安全题（21-23）**：防御策略见 [ch08 安全章节](/08-security/)
+- **工程化题（24-31）**：生产实践见 [ch07 生产化](/07-production/)
+:::
+
 ## LLM 基础
 
 ### 1. 解释 Transformer 中 Self-Attention 的工作原理

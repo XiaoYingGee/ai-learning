@@ -3,6 +3,11 @@ title: "Prompt Injection 防御"
 description: "直接注入与间接注入的攻击原理、示例与防御策略"
 ---
 
+:::tip[与其他章节的关联]
+- **ch07 Guardrails**：InputGuard 提供了 Prompt Injection 的输入过滤实现，详见 [Guardrails 章节](/07-production/03-guardrails/)
+- **ch08/02 数据隔离**：权限最小化原则是 Injection 防御的重要一环
+:::
+
 ## 什么是 Prompt Injection
 
 Prompt Injection（提示词注入）是指攻击者通过精心构造的输入，**劫持 LLM 的行为**，使其忽略原始指令、泄露系统提示或执行非预期操作。
@@ -143,25 +148,28 @@ def detect_leaked_system_prompt(output: str, system_prompt: str) -> bool:
 | 模型层 | Sandwich Defense | 增强模型抗干扰能力 |
 | 输出层 | 泄露检测 + PII 过滤 | 最后的安全网 |
 
-## 自测问题
+## 自测题
 
-<details>
-<summary>1. 间接注入为什么比直接注入更危险？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：间接注入为什么比直接注入更危险？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">间接注入对用户完全不可见——恶意指令藏在网页、文档等外部数据源中，Agent 在正常工作流程中自动读取时就会触发。用户和开发者都难以察觉攻击的发生。而且攻击面更广，任何 Agent 可以访问的外部数据（网页、邮件、PDF、数据库）都可能被注入，防御难度远高于直接注入。</div>
+  </details>
+</div>
 
-间接注入对用户不可见（藏在网页、文档等外部数据源中），Agent 在正常工作流程中就会触发，用户和开发者都难以察觉。而且攻击面更广——任何 Agent 可以访问的外部数据都可能被注入。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么不能只靠输入过滤来防御 Prompt Injection？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">因为自然语言的表达方式几乎无限多样，攻击者可以用同义词替换、多语言混合、Base64 编码、Unicode 变体等方式绕过基于规则的过滤器。例如，将"忽略指令"改写为"请跳过前面的要求"或用其他语言表述，就能轻松绕过关键词黑名单。输入过滤只能拦截已知的攻击模式，属于必要但不充分的防御层。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. 为什么不能只靠输入过滤来防御 Prompt Injection？</summary>
-
-因为自然语言的表达方式无限多样，攻击者可以用同义词替换、多语言混合、编码变换等方式绕过任何基于规则的过滤器。输入过滤只能拦截已知的攻击模式。
-</details>
-
-<details>
-<summary>3. 权限最小化是如何降低注入风险的？</summary>
-
-即使攻击者成功劫持了 Agent 的行为，如果 Agent 本身没有发送邮件、删除数据等高风险操作的权限，攻击者能造成的损害也被限制在一个很小的范围内。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：权限最小化是如何降低注入风险的？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">即使攻击者成功劫持了 Agent 的行为，如果 Agent 本身没有发送邮件、删除数据、转账等高风险操作的权限，攻击者能造成的损害也被限制在很小的范围内。例如，一个只有搜索和查询权限的 Agent 即使被注入，也无法执行写入或外发操作。这就是"Defense in Depth"（纵深防御）理念的核心——假设每一层都可能被突破，限制每一层的能力边界。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 

@@ -3,6 +3,12 @@ title: "社区资源"
 description: "AI Agent 相关的博客、论坛、Discord 和中文社区资源"
 ---
 
+:::tip[与其他章节的关联]
+- Anthropic Blog 的 Tool Use 和 MCP 文章 → [ch05](/05-tool-use/) 和 [ch06](/06-mcp/) 的补充阅读
+- LangChain Blog 的 Agent 架构文章 → [ch02 设计模式](/02-patterns/) 的实践案例
+- Reddit r/LocalLLaMA → 本地部署和量化相关，补充 [ch01 LLM 基础](/01-llm-basics/)
+:::
+
 ## 官方博客
 
 ### Anthropic Engineering Blog

@@ -3,6 +3,13 @@ title: "官方文档"
 description: "AI Agent 开发相关的官方文档和 SDK 参考"
 ---
 
+:::tip[与其他章节的关联]
+- Anthropic Claude API / MCP 文档 → [ch05 Tool Use](/05-tool-use/) 和 [ch06 MCP](/06-mcp/)
+- LangChain / LangGraph 文档 → [ch02 Agent 设计模式](/02-patterns/) 的框架实现
+- LlamaIndex 文档 → [ch04 RAG 深入](/04-rag/) 的工程化实践
+- 向量数据库文档 → [ch04 RAG](/04-rag/) 中的检索层选型
+:::
+
 ## LLM 提供商
 
 ### Anthropic
@@ -23,6 +30,8 @@ description: "AI Agent 开发相关的官方文档和 SDK 参考"
 - 传输层（stdio、HTTP+SSE）
 
 **推荐阅读顺序：** Messages API → Tool Use → Prompt Engineering Guide → MCP Specification
+
+> **为什么推荐：** Anthropic 的文档以清晰的示例和最佳实践著称，Tool Use 文档是理解 Function Calling 工程实现的最佳参考。MCP 文档是构建可复用工具生态的必读材料。
 
 ---
 
@@ -93,6 +102,8 @@ description: "AI Agent 开发相关的官方文档和 SDK 参考"
 
 **推荐阅读顺序：** LangChain 快速入门 → LangGraph 概念 → 构建 Agent → LangSmith 集成
 
+> **为什么推荐：** LangChain 生态是目前最成熟的 Agent 开发工具链。即使你最终选择自研，理解 LangChain 的抽象设计也能帮助你更好地理解 Agent 架构。LangGraph 的图工作流模型是复杂 Agent 编排的事实标准。
+
 ---
 
 ### LlamaIndex
@@ -111,6 +122,8 @@ description: "AI Agent 开发相关的官方文档和 SDK 参考"
 - Evaluation（RAG 评估工具）
 
 **推荐阅读顺序：** 快速入门 → RAG Pipeline → Agentic RAG → Evaluation
+
+> **为什么推荐：** LlamaIndex 在 RAG 领域的抽象设计最为成熟，特别是数据连接器和索引类型的丰富度。如果你的 Agent 系统核心是知识检索，LlamaIndex 是首选框架。
 
 ---
 

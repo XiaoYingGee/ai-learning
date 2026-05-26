@@ -3,6 +3,12 @@ title: "设计题：RAG 驱动的企业知识库"
 description: "系统设计面试题 — 设计一个支持多数据源、权限控制和答案可追溯的企业级知识库系统"
 ---
 
+:::tip[与其他章节的关联]
+- **ch04 RAG**：本设计题是 RAG 的完整工程化落地，分块、检索、Reranking 的原理详见 [RAG 深入](/04-rag/)
+- **ch08 数据隔离**：权限过滤（ACL/SSO/LDAP）的详细讨论，详见 [数据隔离章节](/08-security/02-data-isolation/)
+- **ch07 生产化**：评估指标（RAGAS）和可观测性实现，详见 [生产化章节](/07-production/)
+:::
+
 ## 题目
 
 > 设计一个 RAG 驱动的企业知识库系统，员工可以用自然语言查询公司内部文档，系统返回准确的答案并标注来源。
@@ -108,6 +114,10 @@ flowchart TD
     Q --> Keyword["关键词检索\n（BM25）"]
     Semantic --> RRF["Reciprocal Rank Fusion"]
     Keyword --> RRF
+
+:::note[术语：Reciprocal Rank Fusion (RRF)]
+**RRF（倒数排名融合）** 是一种将多个检索结果列表合并为统一排名的算法。公式为 $\text{score}(d) = \sum_r \frac{1}{k + \text{rank}_r(d)}$，其中 $k$ 通常取 60。RRF 的优势在于不需要对不同检索器的分数做归一化，简单高效且效果稳定。
+:::
     RRF --> TopK["Top-K 结果"]
     TopK --> Rerank["Reranker\n（Cross-encoder 重排序）"]
     Rerank --> Final["最终 Top-N 结果"]

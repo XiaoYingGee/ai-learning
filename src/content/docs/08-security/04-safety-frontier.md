@@ -83,6 +83,10 @@ def auto_red_team(target_agent, num_attacks: int = 100):
 
 ## Constitutional AI
 
+:::note[术语：Constitutional AI]
+**Constitutional AI（CAI，宪法 AI）** 是 Anthropic 提出的对齐方法，给 AI 一套明确的行为准则（"宪法"），让 AI 根据这些准则自我审查和修正输出。CAI 是 RLAIF 的一种实现，用 AI 自身的判断替代人类标注来提供偏好反馈。
+:::
+
 Constitutional AI（CAI）是 Anthropic 提出的对齐方法。核心思想是给 AI 一套**明确的原则（宪法）**，让 AI 根据这些原则自我审查和修正输出。
 
 ### 工作流程
@@ -134,6 +138,18 @@ AI 回答: {response}
 
 ## RLHF / RLAIF
 
+:::note[术语：RLHF / RLAIF]
+**RLHF（Reinforcement Learning from Human Feedback）** 使用人类偏好数据训练奖励模型，再通过强化学习优化 LLM 的输出质量。**RLAIF（...from AI Feedback）** 用 AI 替代人类提供偏好反馈，大幅降低标注成本。两者都是当前 LLM 对齐的核心技术。
+:::
+
+:::note[术语：PPO]
+**PPO（Proximal Policy Optimization，近端策略优化）** 是 RLHF 中最常用的强化学习算法。它通过限制策略更新的幅度来保证训练稳定性，避免模型在优化过程中偏离过远。PPO 是 ChatGPT、Claude 等模型训练流程的关键组件。
+:::
+
+:::note[术语：Reward Model]
+**Reward Model（奖励模型）** 是 RLHF 流程中的核心组件，从人类偏好数据中学习"什么是好的回答"。训练时，人类标注员对模型的多个输出进行排序，Reward Model 学习这些偏好，然后为 PPO 提供奖励信号来优化 LLM。
+:::
+
 **RLHF（Reinforcement Learning from Human Feedback）** 和 **RLAIF（...from AI Feedback）** 是训练 LLM 的核心对齐技术。
 
 ### RLHF 流程
@@ -173,25 +189,28 @@ AI 回答: {response}
 
 建议将安全评估纳入 CI/CD Pipeline，每次部署前自动运行。
 
-## 自测问题
+## 自测题
 
-<details>
-<summary>1. Red Teaming 和普通的功能测试有什么本质区别？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Red Teaming 和普通的功能测试有什么本质区别？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">功能测试验证系统在正常输入下是否按预期工作；Red Teaming 主动使用恶意和异常输入，试图让系统产生非预期行为。功能测试证明"能用"，Red Teaming 证明"难以滥用"。例如功能测试会检查"查询订单状态"是否返回正确结果，而 Red Teaming 会尝试通过订单查询接口注入指令来获取其他用户的数据。</div>
+  </details>
+</div>
 
-功能测试验证系统在正常输入下是否按预期工作；Red Teaming 主动使用恶意和异常输入，试图让系统产生非预期行为。功能测试证明"能用"，Red Teaming 证明"难以滥用"。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Constitutional AI 为什么不直接用规则过滤，而是让 AI 自我审查？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">规则过滤是死板的——只能检查预定义的模式，无法理解上下文和语义。AI 自我审查能理解"为什么"某个回答有问题，可以发现规则无法覆盖的微妙违规。而且 AI 可以在保持回答有用性的同时修正问题部分，而不是简单地拒绝整个回答。例如一个关于化学的合理问题可能被关键词过滤误杀，但 CAI 能理解上下文是教育目的。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. Constitutional AI 为什么不直接用规则过滤，而是让 AI 自我审查？</summary>
-
-规则过滤是死板的——只能检查预定义的模式。AI 自我审查能理解语义和上下文，可以发现规则无法覆盖的微妙违规。而且 AI 可以在保持回答有用性的同时修正问题，而不是简单地拒绝。
-</details>
-
-<details>
-<summary>3. RLHF 的"过度安全"问题是什么？</summary>
-
-模型被训练为避免任何可能被人类评委标记为"有害"的回答，导致它对很多无害的正常问题也拒绝回答（比如拒绝讨论任何与"武器"相关的话题，即使是历史课的作业）。这降低了模型的实用性。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：RLHF 的"过度安全"问题是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">模型被训练为避免任何可能被人类评委标记为"有害"的回答，导致它对很多无害的正常问题也拒绝回答。例如拒绝讨论任何与"武器"相关的话题（即使是历史课作业），或拒绝解释药物的化学成分（即使是正常的科学问题）。这本质上是 Reward Model 的偏差——它学会了"拒绝比冒险回答更安全"的策略，降低了模型的实用性。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 

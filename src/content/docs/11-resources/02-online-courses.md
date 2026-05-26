@@ -3,6 +3,13 @@ title: "在线课程"
 description: "精选 AI Agent 在线课程推荐，以 DeepLearning.AI 和 Coursera 为主"
 ---
 
+:::tip[与其他章节的关联]
+- Andrew Ng 的 Agentic AI 课程对应 [ch02 Agent 设计模式](/02-patterns/) 中的四种核心模式
+- Agentic RAG with LlamaIndex 对应 [ch04 RAG 深入](/04-rag/)
+- Agent Skills with Anthropic 对应 [ch05 Tool Use](/05-tool-use/) 和 [ch06 MCP](/06-mcp/)
+- Multi-Agent with CrewAI 对应 [ch02 Multi-Agent 架构](/02-patterns/)
+:::
+
 ## DeepLearning.AI 课程
 
 ### Agentic AI with Andrew Ng
