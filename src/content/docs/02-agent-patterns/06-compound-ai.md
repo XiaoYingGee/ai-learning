@@ -161,24 +161,16 @@ def test_reranker():
 
 ## 何时用 Compound AI vs 单 Agent
 
-```
-选择 Compound AI 当:
-  ✓ 任务流程相对固定
-  ✓ 需要高可靠性和可观测性
-  ✓ 需要精细的成本控制
-  ✓ 有明确的质量评估标准
-  例: RAG 系统、数据处理管道、内容审核
-
-选择单 Agent 当:
-  ✓ 任务开放性强，步骤不确定
-  ✓ 需要动态决策和工具选择
-  ✓ 人机交互场景
-  例: 个人助手、代码调试、开放问答
-
-两者结合:
-  Agent 作为编排器，内部调用 Compound AI 组件
-  例: Agent 决定使用 RAG 检索 → 调用优化过的 RAG pipeline
-```
+<div style="display:flex;gap:2rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap;">
+  <div style="border:2px solid #60a5fa;border-radius:12px;padding:1.2rem 1.5rem;min-width:220px;">
+    <div style="font-weight:bold;color:#60a5fa;margin-bottom:.5rem;">选择 Compound AI 当：</div>
+    <div style="font-size:.9rem;">✓ 任务流程相对固定<br/>✓ 需要高可靠性和可观测性<br/>✓ 需要精细的成本控制<br/>✓ 有明确的质量评估标准<br/><em>例: RAG、数据管道、内容审核</em></div>
+  </div>
+  <div style="border:2px solid #f97316;border-radius:12px;padding:1.2rem 1.5rem;min-width:220px;">
+    <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">选择单 Agent 当：</div>
+    <div style="font-size:.9rem;">✓ 任务开放性强，步骤不确定<br/>✓ 需要动态决策和工具选择<br/>✓ 用户交互复杂多变<br/>✓ 快速原型验证<br/><em>例: 编程助手、研究助手</em></div>
+  </div>
+</div>
 
 <details>
 <summary>自测题 1：Compound AI System 相比单一大模型调用的核心优势是什么？</summary>

@@ -148,21 +148,13 @@ system_prompt = """
 
 ### 设计原则
 
-```
-好的 System Prompt 结构：
-
-┌──────────────────────┐
-│ 1. 角色定义           │  ← 你是谁？
-├──────────────────────┤
-│ 2. 能力与约束         │  ← 能做什么/不能做什么？
-├──────────────────────┤
-│ 3. 输出格式           │  ← 怎么回答？
-├──────────────────────┤
-│ 4. 示例 (可选)        │  ← Few-shot 示例
-├──────────────────────┤
-│ 5. 安全护栏           │  ← 红线规则
-└──────────────────────┘
-```
+<div style="display:flex;flex-direction:column;gap:0;margin:1.5rem 0;max-width:400px;">
+  <div style="background:#1e3a5f;color:#fff;padding:.8rem 1.2rem;border-radius:12px 12px 0 0;font-weight:bold;">1. 角色定义 <span style="font-weight:normal;opacity:.7;">← 你是谁？</span></div>
+  <div style="background:#1a3350;color:#fff;padding:.8rem 1.2rem;border-top:1px solid #2a4a6f;">2. 能力与约束 <span style="opacity:.7;">← 能做什么/不能做什么？</span></div>
+  <div style="background:#162b45;color:#fff;padding:.8rem 1.2rem;border-top:1px solid #2a4a6f;">3. 输出格式 <span style="opacity:.7;">← 怎么回答？</span></div>
+  <div style="background:#12233a;color:#fff;padding:.8rem 1.2rem;border-top:1px solid #2a4a6f;">4. 示例（可选） <span style="opacity:.7;">← Few-shot 示例</span></div>
+  <div style="background:#0e1b2f;color:#fff;padding:.8rem 1.2rem;border-radius:0 0 12px 12px;border-top:1px solid #2a4a6f;">5. 安全护栏 <span style="opacity:.7;">← 红线规则</span></div>
+</div>
 
 ## Prompt 模板化与版本管理
 

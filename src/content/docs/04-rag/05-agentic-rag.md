@@ -11,20 +11,16 @@ Agentic RAG 则让 Agent **自主决定**：要不要检索？检索什么？从
 
 类比：传统 RAG 像一个只会按固定流程查资料的实习生，Agentic RAG 像一个经验丰富的研究员——他知道什么时候该查文献、查哪个数据库、查到的结果是否靠谱。
 
-```
-┌────────────────────────────────────────────────────┐
-│  传统 RAG：                                        │
-│  问题 ──→ 检索 ──→ 生成（固定流水线）                │
-│                                                    │
-│  Agentic RAG：                                     │
-│  问题 ──→ Agent 思考：                              │
-│           ├─ 这个问题需要检索吗？                     │
-│           ├─ 应该查哪个数据源？                       │
-│           ├─ 检索结果够回答吗？                       │
-│           └─ 需要换个角度再查吗？                     │
-│           ──→ 自主决策 ──→ 生成                     │
-└────────────────────────────────────────────────────┘
-```
+<div style="display:flex;gap:2rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap;">
+  <div style="border:2px solid #888;border-radius:12px;padding:1.2rem 1.5rem;min-width:200px;">
+    <div style="font-weight:bold;margin-bottom:.5rem;">传统 RAG</div>
+    <div style="font-size:.9rem;">问题 → 检索 → 生成<br/>（固定流水线）</div>
+  </div>
+  <div style="border:2px solid #60a5fa;border-radius:12px;padding:1.2rem 1.5rem;min-width:200px;">
+    <div style="font-weight:bold;color:#60a5fa;margin-bottom:.5rem;">Agentic RAG</div>
+    <div style="font-size:.9rem;">问题 → Agent 自主思考：<br/>· 需要检索吗？<br/>· 查哪个数据源？<br/>· 结果够吗？<br/>· 换角度再查？<br/>→ 自主决策 → 生成</div>
+  </div>
+</div>
 
 ## 与传统 RAG 的区别
 

@@ -15,26 +15,20 @@ Agent 的记忆系统解决三个核心问题：
 
 ## 三种记忆类型
 
-```
-┌──────────────────────────────────────────────────────┐
-│                Agent 记忆架构                          │
-│                                                      │
-│  ┌──────────────┐  生命周期：单次对话                   │
-│  │  短期记忆      │  类比：工作台上摊开的文件              │
-│  │ Short-term   │  实现：对话历史（messages 数组）       │
-│  └──────────────┘                                    │
-│                                                      │
-│  ┌──────────────┐  生命周期：当前任务                   │
-│  │  工作记忆      │  类比：便利贴上的待办清单              │
-│  │ Working      │  实现：Scratchpad / 状态变量          │
-│  └──────────────┘                                    │
-│                                                      │
-│  ┌──────────────┐  生命周期：永久                      │
-│  │  长期记忆      │  类比：笔记本中的永久记录              │
-│  │ Long-term    │  实现：向量数据库 / 文件系统            │
-│  └──────────────┘                                    │
-└──────────────────────────────────────────────────────┘
-```
+<div style="display:flex;flex-direction:column;gap:.8rem;margin:1.5rem 0;">
+  <div style="border:2px solid #60a5fa;border-radius:12px;padding:1rem 1.5rem;">
+    <div style="font-weight:bold;color:#60a5fa;">短期记忆 Short-term</div>
+    <div style="font-size:.9rem;">生命周期：单次对话 · 类比：工作台上摊开的文件 · 实现：对话历史（messages 数组）</div>
+  </div>
+  <div style="border:2px solid #f97316;border-radius:12px;padding:1rem 1.5rem;">
+    <div style="font-weight:bold;color:#f97316;">工作记忆 Working</div>
+    <div style="font-size:.9rem;">生命周期：当前任务 · 类比：便利贴上的待办清单 · 实现：Scratchpad / 状态变量</div>
+  </div>
+  <div style="border:2px solid #22c55e;border-radius:12px;padding:1rem 1.5rem;">
+    <div style="font-weight:bold;color:#22c55e;">长期记忆 Long-term</div>
+    <div style="font-size:.9rem;">生命周期：永久 · 类比：笔记本中的永久记录 · 实现：向量数据库 / 文件系统</div>
+  </div>
+</div>
 
 ### 短期记忆（对话上下文）
 
