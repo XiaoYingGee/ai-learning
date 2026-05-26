@@ -42,6 +42,10 @@ flowchart LR
 
 ### RAG 作为 Compound AI System
 
+:::tip[与其他章节的关联]
+RAG（检索增强生成）是 Compound AI System 最经典的实例。第 4 章深入讲解了 RAG 的完整实现：从文档分块、向量化、检索策略到生成优化。如果你想了解下面这个架构图中每个组件的具体实现细节，请参见 [第 4 章：RAG](/04-rag/)。
+:::
+
 ```mermaid
 flowchart TD
     Q["用户问题"] --> QR["查询改写\n（LLM, 小模型）"]
@@ -60,6 +64,10 @@ flowchart TD
 ```
 
 ## DSPy 框架简介
+
+:::note[术语：DSPy]
+DSPy（Declarative Self-improving Python）是 Stanford NLP 组开发的框架，核心理念是将 Prompt Engineering 从手工调试变为程序化优化。开发者定义输入/输出的"签名"（Signature），DSPy 的优化器（Optimizer）自动搜索最佳 Prompt 和 Few-shot 示例。名字中的"Py"既指 Python，也呼应 PyTorch 的设计哲学——用声明式模块组合替代手动配置。
+:::
 
 **DSPy** 是 Stanford NLP 组开发的框架，将 Compound AI System 的构建**程序化**，用代码而非手写 Prompt 来定义 AI 系统。
 
@@ -172,23 +180,32 @@ def test_reranker():
   </div>
 </div>
 
-<details>
-<summary>自测题 1：Compound AI System 相比单一大模型调用的核心优势是什么？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Compound AI System 相比单一大模型调用的核心优势是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      核心优势是可控性和可优化性。每个组件可以独立监控、调试、替换和优化，而不是把所有希望寄托在一个大模型上。此外，可以针对不同组件使用不同成本的模型，实现整体成本优化。
+    </div>
+  </details>
+</div>
 
-核心优势是可控性和可优化性。每个组件可以独立监控、调试、替换和优化，而不是把所有希望寄托在一个大模型上。此外，可以针对不同组件使用不同成本的模型，实现整体成本优化。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：DSPy 解决了 Prompt Engineering 的什么问题？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      DSPy 解决了 Prompt Engineering 的不可复现和手动调优问题。传统方式需要人工反复修改 Prompt，过程不可复现且难以系统化优化。DSPy 将 Prompt 视为可优化的参数，通过 Optimizer 基于评估指标自动搜索最佳 Prompt 和 Few-shot 示例。
+    </div>
+  </details>
+</div>
 
-<details>
-<summary>自测题 2：DSPy 解决了 Prompt Engineering 的什么问题？</summary>
-
-DSPy 解决了 Prompt Engineering 的不可复现和手动调优问题。传统方式需要人工反复修改 Prompt，过程不可复现且难以系统化优化。DSPy 将 Prompt 视为可优化的参数，通过 Optimizer 基于评估指标自动搜索最佳 Prompt 和 Few-shot 示例。
-</details>
-
-<details>
-<summary>自测题 3：一个 RAG 系统中有哪些组件可以独立优化？</summary>
-
-1) 查询改写器：优化搜索查询；2) 检索器：更换检索算法或模型；3) 重排序器：提高相关性排序质量；4) 文档分块策略：调整 chunk size 和重叠；5) LLM 生成器：更换模型或优化 Prompt；6) 输出格式化：调整答案格式和引用方式。每个环节的改进都可以独立评估效果。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：一个 RAG 系统中有哪些组件可以独立优化？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      1) 查询改写器：优化搜索查询；2) 检索器：更换检索算法或模型；3) 重排序器：提高相关性排序质量；4) 文档分块策略：调整 chunk size 和重叠；5) LLM 生成器：更换模型或优化 Prompt；6) 输出格式化：调整答案格式和引用方式。每个环节的改进都可以独立评估效果。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 

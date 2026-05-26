@@ -183,7 +183,11 @@ def replan(original_plan, completed_steps, failed_step, error_info, llm):
 
 ## 面试常见问题
 
-### Q1: Plan-and-Execute 和 ReAct 如何选择？
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Plan-and-Execute 和 ReAct 如何选择？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">
 
 | 场景 | 推荐模式 |
 |------|---------|
@@ -192,34 +196,60 @@ def replan(original_plan, completed_steps, failed_step, error_info, llm):
 | 需要探索多种方案 | ToT |
 | 不确定步骤数的开放任务 | ReAct + Reflection |
 
-### Q2: 如何评估 Agent 的规划质量？
+</div>
+  </details>
+</div>
 
-1. **完整性**：计划是否覆盖了所有必要步骤？
-2. **可执行性**：每个步骤是否具体到可以直接执行？
-3. **依赖关系**：步骤间的顺序是否合理？
-4. **容错性**：是否考虑了失败场景？
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 如何评估 Agent 的规划质量？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">
+      1. **完整性**：计划是否覆盖了所有必要步骤？2. **可执行性**：每个步骤是否具体到可以直接执行？3. **依赖关系**：步骤间的顺序是否合理？4. **容错性**：是否考虑了失败场景？
+    </div>
+  </details>
+</div>
 
-### Q3: 规划粒度多细合适？
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 规划粒度多细合适？</div>
+  <details>
+    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
+    <div style="margin-top:.5rem;font-size:.9rem;">
+      太粗的计划缺乏指导性，太细的计划缺乏灵活性。经验法则：每个步骤应该对应 1-2 次工具调用或 LLM 推理。
+    </div>
+  </details>
+</div>
 
-太粗的计划缺乏指导性，太细的计划缺乏灵活性。经验法则：每个步骤应该对应 1-2 次工具调用或 LLM 推理。
+:::tip[与其他章节的关联]
+Plan-and-Execute 模式在实际编程场景中被广泛采用。第 6 章（Coding Agent）详细展示了如何将 Plan-and-Execute 应用于代码生成和调试任务，包括 Claude Code、Cursor 等工具的内部实现思路。参见 [第 6 章：Coding Agent](/06-coding-agent/)。
+:::
 
-<details>
-<summary>自测题 1：Plan-and-Execute 模式的主要优势是什么？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Plan-and-Execute 模式的主要优势是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      1) 全局视角：先看到完整任务再动手，避免遗漏步骤；2) 可追踪：每个步骤有明确目的，便于调试；3) 可并行：独立的子任务可以并行执行；4) 可复用：相似任务的计划模板可以复用。
+    </div>
+  </details>
+</div>
 
-1) 全局视角：先看到完整任务再动手，避免遗漏步骤；2) 可追踪：每个步骤有明确目的，便于调试；3) 可并行：独立的子任务可以并行执行；4) 可复用：相似任务的计划模板可以复用。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Tree of Thought 相比标准 CoT 的代价是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      ToT 需要探索多条推理路径并对每条路径进行评估，导致 LLM 调用次数成倍增加。如果分支因子为 b、深度为 d，最坏情况下需要 O(b^d) 次调用。因此 ToT 通常只用于高价值场景，且需要设计好剪枝策略。
+    </div>
+  </details>
+</div>
 
-<details>
-<summary>自测题 2：Tree of Thought 相比标准 CoT 的代价是什么？</summary>
-
-ToT 需要探索多条推理路径并对每条路径进行评估，导致 LLM 调用次数成倍增加。如果分支因子为 b、深度为 d，最坏情况下需要 O(b^d) 次调用。因此 ToT 通常只用于高价值场景，且需要设计好剪枝策略。
-</details>
-
-<details>
-<summary>自测题 3：动态重规划在什么情况下会触发？</summary>
-
-1) 工具调用失败（API 报错、超时）；2) 获取到的信息与预期不符；3) 发现了新的关键信息需要调整方向；4) 某个步骤的输出表明原计划不可行。好的 Agent 应该在每步执行后评估是否需要调整计划。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：动态重规划在什么情况下会触发？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      1) 工具调用失败（API 报错、超时）；2) 获取到的信息与预期不符；3) 发现了新的关键信息需要调整方向；4) 某个步骤的输出表明原计划不可行。好的 Agent 应该在每步执行后评估是否需要调整计划。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 
