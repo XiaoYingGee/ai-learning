@@ -150,7 +150,7 @@ response = client.messages.create(
 # 第二次调用相同 system prompt 时，会命中缓存
 ```
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：KV Cache 为什么能加速推理？它的代价是什么？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -160,7 +160,7 @@ response = client.messages.create(
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：RAG 相比直接加大上下文窗口有什么优势？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -170,7 +170,7 @@ response = client.messages.create(
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Prompt Caching 的最佳实践是什么？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">

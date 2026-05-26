@@ -9,6 +9,10 @@ ReAct 由 Yao et al. (2022) 提出，论文标题：*"ReAct: Synergizing Reasoni
 
 核心洞见：**将推理（Reasoning）和行动（Acting）交织在一起，比单独做推理或单独做行动效果更好**。
 
+:::note[术语：CoT (Chain-of-Thought)]
+CoT（思维链）是一种让 LLM 逐步推理的 Prompting 技术——在给出最终答案前，先输出中间推理步骤。Wei et al. (2022) 的研究表明，CoT 能显著提升模型在数学、逻辑等复杂任务上的表现。ReAct 可以看作是 CoT 的升级版：在推理步骤之间插入了外部行动。
+:::
+
 ```mermaid
 flowchart LR
     subgraph CoT["只有推理（CoT）"]
@@ -181,6 +185,10 @@ Step 7+:  可能偏离主题或循环
 
 标准 ReAct 是线性的——一旦走错路，无法回退到之前的状态重新尝试。这催生了 Reflection 和 Planning 模式（后续章节）。
 
+:::note[术语：Hallucination / 幻觉]
+幻觉指 LLM 生成看似合理但实际不正确的内容。在纯 CoT 推理中，模型只能依赖训练数据，无法验证事实，因此特别容易产生幻觉。ReAct 通过引入外部工具调用（Action）让模型可以查询真实数据，从而缓解这一问题。
+:::
+
 ### 4. 依赖 Prompt 格式
 
 模型必须严格遵循 Thought/Action/Observation 格式。格式错误会导致解析失败。现代框架（如 LangChain、Claude Tool Use）通过结构化工具调用部分解决了这个问题。
@@ -193,23 +201,36 @@ Step 7+:  可能偏离主题或循环
 | 无全局规划 | Planning 模式 | 第 2 章第 4 节 |
 | 单点故障 | Multi-Agent | 第 2 章第 5 节 |
 
-<details>
-<summary>自测题 1：ReAct 相比纯 CoT 的核心优势是什么？</summary>
+:::tip[与其他章节的关联]
+ReAct 的 Action 阶段依赖外部工具调用。第 3 章详细介绍了工具使用（Tool Use）的实现机制，包括 Function Calling、MCP 协议等——这些是 ReAct Agent 在生产环境中执行行动的基础设施。参见 [第 3 章：工具使用与 MCP](/03-tool-use/)。
+:::
 
-ReAct 引入了 Action 阶段，使模型能调用外部工具获取实时信息，而非仅依赖训练数据进行推理。这解决了 CoT 容易产生幻觉的问题——模型可以通过搜索、计算等工具验证自己的推理。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：ReAct 相比纯 CoT 的核心优势是什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      ReAct 引入了 Action 阶段，使模型能调用外部工具获取实时信息，而非仅依赖训练数据进行推理。这解决了 CoT 容易产生幻觉的问题——模型可以通过搜索、计算等工具验证自己的推理。
+    </div>
+  </details>
+</div>
 
-<details>
-<summary>自测题 2：ReAct 循环中 Thought 阶段的作用是什么？能否跳过？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：ReAct 循环中 Thought 阶段的作用是什么？能否跳过？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      Thought 阶段让模型在行动前先进行推理和规划，决定下一步应该做什么、为什么要做。如果跳过 Thought 直接行动（Action-only），模型会缺乏规划能力，可能盲目调用工具或遗漏重要步骤。论文实验表明，去掉 Thought 会显著降低效果。
+    </div>
+  </details>
+</div>
 
-Thought 阶段让模型在行动前先进行推理和规划，决定下一步应该做什么、为什么要做。如果跳过 Thought 直接行动（Action-only），模型会缺乏规划能力，可能盲目调用工具或遗漏重要步骤。论文实验表明，去掉 Thought 会显著降低效果。
-</details>
-
-<details>
-<summary>自测题 3：现代 Agent 框架如何改进了原始 ReAct 的格式依赖问题？</summary>
-
-现代框架使用结构化的工具调用协议（如 OpenAI Function Calling、Claude Tool Use），模型直接输出 JSON 格式的工具调用请求，而非在自然语言中嵌入特定格式。这消除了格式解析错误，使工具调用更可靠。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：现代 Agent 框架如何改进了原始 ReAct 的格式依赖问题？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      现代框架使用结构化的工具调用协议（如 OpenAI Function Calling、Claude Tool Use），模型直接输出 JSON 格式的工具调用请求，而非在自然语言中嵌入特定格式。这消除了格式解析错误，使工具调用更可靠。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 

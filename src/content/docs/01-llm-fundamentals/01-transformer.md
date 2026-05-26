@@ -133,7 +133,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
 
 ## 面试考点
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 为什么 Attention 公式要除以 $\sqrt{d_k}$？</div>
   <details>
     <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
@@ -143,7 +143,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Multi-Head Attention 的作用是什么？</div>
   <details>
     <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
@@ -153,7 +153,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Decoder 中的 Masked Attention 是什么？</div>
   <details>
     <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
@@ -163,7 +163,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Transformer 的计算复杂度是多少？</div>
   <details>
     <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
@@ -173,7 +173,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Self-Attention 中 Q、K、V 分别代表什么？为什么需要三个不同的矩阵？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -183,7 +183,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Transformer 为什么能并行训练而 RNN 不能？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -193,7 +193,7 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：如果去掉 Position Encoding，Transformer 会怎样？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">

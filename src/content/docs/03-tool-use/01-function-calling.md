@@ -110,21 +110,48 @@ if message.tool_calls:
 2. **Function Calling 不是 100% 可靠** —— LLM 可能选错工具或生成无效参数
 3. **工具描述至关重要** —— 描述不清楚，LLM 就不知道何时该用这个工具
 
+## 常见陷阱
+
+在实际项目中，Function Calling 容易踩的坑远比想象的多：
+
+1. **工具描述质量 > 一切** —— 很多人花大量时间优化 prompt，却忽略了工具的 `description`。LLM 选错工具的 80% 原因是描述写得模糊。应包含：做什么、何时用、参数示例。
+2. **返回值过大导致上下文爆炸** —— 如果工具返回一个 10 万字的数据库查询结果，会挤占 LLM 的上下文窗口。应在工具层做截断或分页。
+3. **缺少错误处理** —— 工具调用失败时，应返回结构化的错误信息（如 `{"error": "城市名无效"}`），而不是抛异常或返回空值。LLM 需要理解错误才能自我纠正。
+4. **忽略工具调用的确认环节** —— 对于有副作用的操作（如发邮件、下单），应加一层人工确认，而不是让 LLM 直接执行。
+5. **工具名称冲突或语义重叠** —— 当有 `search_products` 和 `find_items` 两个功能相似的工具时，LLM 会困惑。工具之间应有明确的职责边界。
+
+:::tip[与其他章节的关联]
+Function Calling 是 Agent 使用工具的底层机制。在 [第 2 章：ReAct 模式](/02-agent-patterns/02-react/) 中，Agent 通过 Thought → Action → Observation 循环反复调用工具，而每一次 Action 的实质就是一次 Function Calling。理解了 Function Calling，就理解了 Agent 的"手"。
+:::
+
 ---
 
-<details>
-<summary><strong>自测题</strong></summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Function Calling 中，LLM 实际做了什么？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      LLM 生成结构化的 JSON（函数名 + 参数），而不是真正执行函数。它更像是一个"指挥官"——告诉你的应用代码该调用什么、传什么参数，但自己不动手。
+    </div>
+  </details>
+</div>
 
-1. **Function Calling 中，LLM 实际做了什么？**
-   - 答：生成结构化的 JSON（函数名 + 参数），而不是真正执行函数。
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：OpenAI 和 Claude 在工具结果回传上有什么区别？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      OpenAI 使用独立的 <code>role: "tool"</code> 消息回传结果，Claude 将 <code>tool_result</code> 嵌套在 <code>user</code> 消息的 content block 中。这意味着在 Claude 的 API 中，工具结果是用户消息的一部分，而在 OpenAI 中是一个独立的消息角色。
+    </div>
+  </details>
+</div>
 
-2. **OpenAI 和 Claude 在工具结果回传上有什么区别？**
-   - 答：OpenAI 使用独立的 `role: "tool"` 消息，Claude 将 `tool_result` 嵌套在 `user` 消息的 content block 中。
-
-3. **为什么说工具描述比工具名称更重要？**
-   - 答：LLM 依赖描述来理解工具的用途和使用场景，描述不清会导致工具选择错误。
-
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么说工具描述比工具名称更重要？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">
+      LLM 依赖 description 来理解工具的用途、适用场景和使用时机，name 只是标识符。类比：你去一家餐厅，菜名叫"狮子头"你未必知道是什么，但如果描述写了"红烧大肉丸，肥瘦相间，口感鲜嫩"，你立刻就知道要不要点。
+    </div>
+  </details>
+</div>
 
 ## 延伸阅读
 

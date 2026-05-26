@@ -186,7 +186,7 @@ def classify(user_input: str, categories: list[str]) -> dict:
 - 用 LangSmith、Braintrust 等工具追踪 Prompt 效果
 - 考虑使用 Prompt Management 平台（如 Anthropic Console）
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Few-shot 示例的数量越多越好吗？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -196,7 +196,7 @@ def classify(user_input: str, categories: list[str]) -> dict:
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：CoT 对所有任务都有效吗？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -206,7 +206,7 @@ def classify(user_input: str, categories: list[str]) -> dict:
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：ReAct 和纯 CoT 的核心区别是什么？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">

@@ -146,7 +146,7 @@ Step 2:  "天气" → "天气很"(0.4×0.5) / "天气不"(0.4×0.3)
 
 **注意**：不同 API 的参数组合方式不同。OpenAI 建议只调 Temperature 或 Top-p 之一，不要同时调。Claude API 默认 Temperature=1，Top-p=0.999。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Temperature=0 和 Greedy Decoding 有什么关系？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -156,7 +156,7 @@ Step 2:  "天气" → "天气很"(0.4×0.5) / "天气不"(0.4×0.3)
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么 Top-p 比 Top-k 更优？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
@@ -166,7 +166,7 @@ Step 2:  "天气" → "天气很"(0.4×0.5) / "天气不"(0.4×0.3)
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:#1a1a2e;border-radius:0 8px 8px 0;">
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
   <details>
     <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么代码生成任务通常用低 Temperature？</summary>
     <div style="margin-top:.8rem;font-size:.9rem;">
