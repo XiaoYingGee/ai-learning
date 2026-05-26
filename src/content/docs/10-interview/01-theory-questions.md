@@ -9,24 +9,24 @@ description: "30+ 道 AI Agent 高频理论面试题及参考答案，覆盖 LLM
 
 **答案要点：**
 - Query、Key、Value 三个矩阵的含义
-- Attention Score = softmax(QK^T / √d_k) × V
-- √d_k 缩放防止梯度消失
+- Attention Score: $\text{softmax}\!\left(\frac{QK^T}{\sqrt{d_k}}\right)V$
+- $\sqrt{d_k}$ 缩放防止梯度消失
 - Multi-Head Attention 捕捉不同子空间的关系
 
 ### 2. 为什么 Transformer 比 RNN 更适合处理长序列？
 
 **答案要点：**
 - RNN 有梯度消失/爆炸问题，长距离依赖建模差
-- Transformer 通过 Self-Attention 直接建立任意位置间的关系，O(1) 路径长度
+- Transformer 通过 Self-Attention 直接建立任意位置间的关系，$O(1)$ 路径长度
 - 可并行计算，训练效率高
-- 但 Attention 的 O(n²) 复杂度限制了序列长度
+- 但 Attention 的 $O(n^2)$ 复杂度限制了序列长度
 
 ### 3. 什么是 Temperature？它如何影响生成结果？
 
 **答案要点：**
 - Temperature 控制 softmax 输出的分布锐度
-- T→0：近似 argmax，确定性输出
-- T→∞：近似均匀分布，随机性增大
+- $T \to 0$：近似 argmax，确定性输出
+- $T \to \infty$：近似均匀分布，随机性增大
 - 实际应用中 T=0 用于事实性查询，T=0.7-1.0 用于创意生成
 
 ### 4. 解释 Top-p (Nucleus Sampling) 和 Top-k 的区别
@@ -42,7 +42,7 @@ description: "30+ 道 AI Agent 高频理论面试题及参考答案，覆盖 LLM
 **答案要点：**
 - 自回归生成时，每步只新增一个 token
 - 之前 token 的 Key 和 Value 可以缓存复用
-- 将推理复杂度从 O(n²) 降到 O(n)
+- 将推理复杂度从 $O(n^2)$ 降到 $O(n)$
 - 代价是显存占用增加
 
 ### 6. 解释 Fine-tuning、LoRA 和 Prompt Engineering 的区别和适用场景

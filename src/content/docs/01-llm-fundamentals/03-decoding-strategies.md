@@ -43,9 +43,9 @@ def greedy_decode(model, input_ids, max_length):
 
 Temperature 控制概率分布的"锐利程度"。公式：
 
-```
-P(token_i) = exp(logit_i / T) / Σ exp(logit_j / T)
-```
+$$
+P(\text{token}_i) = \frac{\exp(\text{logit}_i / T)}{\sum_j \exp(\text{logit}_j / T)}
+$$
 
 ```
 Temperature 对概率分布的影响：
@@ -60,9 +60,9 @@ T = 0.1（低温）          T = 1.0（标准）         T = 2.0（高温）
  → 确定性强                → 适度创造性             → 高度随机
 ```
 
-- **T → 0**：趋近 Greedy Decoding
-- **T = 1**：使用模型原始概率
-- **T > 1**：更多随机性和创造性
+- $T \to 0$：趋近 Greedy Decoding
+- $T = 1$：使用模型原始概率
+- $T > 1$：更多随机性和创造性
 
 ## Top-k Sampling
 
@@ -80,7 +80,7 @@ def top_k_sampling(logits, k=50):
 
 ## Top-p（Nucleus Sampling）
 
-动态选择最小的 token 集合，使得它们的累计概率 ≥ p。
+动态选择最小的 token 集合，使得它们的累计概率 $\geq p$。
 
 ```
 示例 (p = 0.9):
