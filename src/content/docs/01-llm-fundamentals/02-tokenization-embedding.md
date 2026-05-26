@@ -72,17 +72,22 @@ Token 数量直接影响：
 
 Token ID 只是一个编号，没有语义信息。Embedding 层将每个 ID 映射为一个高维向量（如 768 维或 4096 维），使得语义相近的词在向量空间中距离更近。
 
-```
-向量空间示意（降维到 2D 展示）：
-
-      ↑
-  猫  ●              ● 汽车
-      ● 狗        ● 卡车
-                ● 火车
-  鸟  ●
-      ──────────────────→
-   （动物区域）    （交通工具区域）
-```
+<div style="display:flex;gap:2rem;justify-content:center;margin:1.5rem 0;">
+  <div style="border:2px solid #60a5fa;border-radius:12px;padding:1.2rem 2rem;text-align:center;min-width:120px;">
+    <div style="font-size:.85rem;color:#60a5fa;margin-bottom:.6rem;font-weight:bold;">🐾 动物区域</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">猫 🔵</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">狗 🔵</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">鸟 🔵</div>
+  </div>
+  <div style="display:flex;align-items:center;color:#888;font-size:2rem;">⟷</div>
+  <div style="border:2px solid #f97316;border-radius:12px;padding:1.2rem 2rem;text-align:center;min-width:120px;">
+    <div style="font-size:.85rem;color:#f97316;margin-bottom:.6rem;font-weight:bold;">🚗 交通工具区域</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">🟠 汽车</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">🟠 卡车</div>
+    <div style="font-size:1.3rem;letter-spacing:.3rem;">🟠 火车</div>
+  </div>
+</div>
+<p style="text-align:center;color:#888;font-size:.85rem;">向量空间示意：语义相近的词聚集在一起，不同类别的词彼此远离</p>
 
 ### 语义相似性计算
 
