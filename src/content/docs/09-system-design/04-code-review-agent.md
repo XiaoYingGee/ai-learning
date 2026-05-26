@@ -23,36 +23,15 @@ description: "系统设计面试题 — 设计一个集成 PR 工作流的自动
 
 ## 架构设计
 
-```
-GitHub/GitLab Webhook
-        ↓
-┌──────────────────┐
-│   Event Handler  │
-│  (接收 + 过滤)    │
-└────────┬─────────┘
-         ↓
-┌──────────────────┐
-│   PR Analyzer    │
-│  (解析变更)       │
-└────────┬─────────┘
-         ↓
-    ┌────┼────┐
-    ↓         ↓
-┌────────┐ ┌────────┐
-│ 静态    │ │ LLM    │
-│ 分析器  │ │ 审查器  │
-└────┬───┘ └────┬───┘
-     └────┬─────┘
-          ↓
-┌──────────────────┐
-│  Result Merger   │
-│ (去重 + 优先级)    │
-└────────┬─────────┘
-         ↓
-┌──────────────────┐
-│ Comment Poster   │
-│ (发布评论)        │
-└──────────────────┘
+```mermaid
+flowchart TD
+    Webhook["GitHub/GitLab Webhook"] --> EH["Event Handler\n（接收 + 过滤）"]
+    EH --> PA["PR Analyzer\n（解析变更）"]
+    PA --> SA["静态分析器"]
+    PA --> LLM["LLM 审查器"]
+    SA --> Merge["Result Merger\n（去重 + 优先级）"]
+    LLM --> Merge
+    Merge --> Post["Comment Poster\n（发布评论）"]
 ```
 
 ## 核心组件设计
@@ -135,19 +114,15 @@ class PRAnalyzer:
 
 ### 多层过滤策略
 
-```
-LLM 输出
-  ↓
-第一层：置信度过滤（丢弃 confidence < 0.7 的建议）
-  ↓
-第二层：规则过滤（已知误报模式黑名单）
-  ↓
-第三层：去重合并（静态分析已覆盖的不重复报告）
-  ↓
-第四层：分级展示
-  ├── 🔴 Must Fix — 安全漏洞、明确 Bug
-  ├── 🟡 Suggestion — 改进建议
-  └── 🟢 Nitpick — 风格建议（可折叠）
+```mermaid
+flowchart TD
+    LLMOut["LLM 输出"] --> F1["第一层: 置信度过滤\n丢弃 confidence < 0.7"]
+    F1 --> F2["第二层: 规则过滤\n已知误报模式黑名单"]
+    F2 --> F3["第三层: 去重合并\n静态分析已覆盖的不重复报告"]
+    F3 --> F4["第四层: 分级展示"]
+    F4 --> Must["🔴 Must Fix"]
+    F4 --> Sug["🟡 Suggestion"]
+    F4 --> Nit["🟢 Nitpick"]
 ```
 
 ### 反馈学习

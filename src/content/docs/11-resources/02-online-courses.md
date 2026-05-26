@@ -71,16 +71,13 @@ description: "精选 AI Agent 在线课程推荐，以 DeepLearning.AI 和 Cours
 
 ### 推荐学习顺序
 
-```
-1. Andrew Ng 的 Agentic AI（概念入门，1-2 小时）
-      ↓
-2. Functions, Tools and Agents with LangChain（工具使用基础）
-      ↓
-3. Agent Skills with Anthropic（Anthropic 生态实战）
-      ↓
-4. Building Agentic RAG with LlamaIndex（RAG + Agent 结合）
-      ↓
-5. Multi-Agent with CrewAI（进阶架构）
+```mermaid
+flowchart TD
+    A["1. Andrew Ng 的 Agentic AI\n（概念入门，1-2 小时）"]
+    A --> B["2. Functions, Tools and Agents\nwith LangChain"]
+    B --> C["3. Agent Skills\nwith Anthropic"]
+    C --> D["4. Building Agentic RAG\nwith LlamaIndex"]
+    D --> E["5. Multi-Agent\nwith CrewAI"]
 ```
 
 ### 时间预估

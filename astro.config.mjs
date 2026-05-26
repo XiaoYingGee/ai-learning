@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { astroMermaid } from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
 		rehypePlugins: [rehypeKatex],
 	},
 	integrations: [
+		astroMermaid(),
 		starlight({
 			title: 'AI Agent 学习指南',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/XiaoYingGee/ai-learning' }],

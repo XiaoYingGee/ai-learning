@@ -49,29 +49,17 @@ ReAct (边想边做):          Planning (先规划再执行):
 
 将 Agent 分为 **Planner** 和 **Executor** 两个角色：
 
-```
-┌───────────────────────────────────────────────┐
-│                                               │
-│  ┌──────────┐                                 │
-│  │ Planner  │  制定计划:                       │
-│  │          │  Step 1: ...                    │
-│  │          │  Step 2: ...                    │
-│  │          │  Step 3: ...                    │
-│  └────┬─────┘                                 │
-│       │                                       │
-│       ▼                                       │
-│  ┌──────────┐  执行 Step 1 ──→ 结果 1        │
-│  │ Executor │  执行 Step 2 ──→ 结果 2        │
-│  │          │  执行 Step 3 ──→ 结果 3        │
-│  └────┬─────┘                                 │
-│       │                                       │
-│       ▼                                       │
-│  ┌──────────┐                                 │
-│  │ Planner  │  根据执行结果判断:               │
-│  │ (再评估) │  - 是否需要追加步骤？            │
-│  │          │  - 是否需要修改计划？            │
-│  └──────────┘                                 │
-└───────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    Planner["Planner\n制定计划"] --> Executor["Executor"]
+    Executor --> S1["执行 Step 1 → 结果 1"]
+    Executor --> S2["执行 Step 2 → 结果 2"]
+    Executor --> S3["执行 Step 3 → 结果 3"]
+    S1 --> Reeval["Planner（再评估）"]
+    S2 --> Reeval
+    S3 --> Reeval
+    Reeval -->|"需要追加/修改"| Planner
+    Reeval -->|"完成"| Done["最终结果"]
 ```
 
 ```python
@@ -130,17 +118,18 @@ def plan_and_execute(task: str, llm, tools: dict, max_replans: int = 3):
 
 ToT 是一种探索多条推理路径的方法，由 Yao et al. (2023) 提出。
 
-```
-标准 CoT (单链推理):
-  问题 → 思路 A → 思路 A' → 思路 A'' → 答案
-
-Tree of Thought (树状探索):
-  问题 ──→ 思路 A ──→ A' ──→ 答案候选 1
-       │         └──→ A'' ──→ (放弃，不合理)
-       ├──→ 思路 B ──→ B' ──→ 答案候选 2
-       └──→ 思路 C ──→ (放弃)
-
-  评估所有候选 → 选择最佳答案
+```mermaid
+flowchart TD
+    Q["问题"] --> A["思路 A"]
+    Q --> B["思路 B"]
+    Q --> C["思路 C"]
+    A --> A1["A'"] --> Ans1["答案候选 1"]
+    A --> A2["A''"] --> X1["❌ 放弃"]
+    B --> B1["B'"] --> Ans2["答案候选 2"]
+    C --> X2["❌ 放弃"]
+    Ans1 --> Eval["评估所有候选"]
+    Ans2 --> Eval
+    Eval --> Best["选择最佳答案"]
 ```
 
 ### ToT 的搜索策略

@@ -97,18 +97,11 @@ def hyde_retrieve(question: str, top_k: int = 5):
 
 向量检索返回的 Top-K 结果排序不够精准。Re-ranker 用更精确（但更慢）的模型对结果重新排序。
 
-```
-┌──────────────────────────────────────────────┐
-│          两阶段检索                             │
-│                                              │
-│  阶段1：向量检索（快但粗）                      │
-│  从 100 万文档中找出 Top-20                    │
-│           │                                  │
-│           ▼                                  │
-│  阶段2：Re-ranking（慢但精）                   │
-│  对 Top-20 用 Cross-Encoder 精排              │
-│  输出 Top-5                                  │
-└──────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    DB["100 万文档"] --> Stage1["阶段 1：向量检索（快但粗）\n找出 Top-20"]
+    Stage1 --> Stage2["阶段 2：Re-ranking（慢但精）\nCross-Encoder 精排"]
+    Stage2 --> Final["输出 Top-5"]
 ```
 
 常用 Re-ranker：

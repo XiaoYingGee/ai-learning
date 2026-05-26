@@ -30,23 +30,16 @@ N × M 种集成
 
 MCP 采用 Client-Server 架构，包含三个核心角色：
 
-```
-┌───────────────────────────────────────────┐
-│                  Host                      │
-│  (如 Claude Desktop、VS Code、IDE)         │
-│                                           │
-│  ┌─────────────────────────────────────┐  │
-│  │           MCP Client                 │  │
-│  │  ┌─────────┐ ┌─────────┐           │  │
-│  │  │Client 1 │ │Client 2 │  ...       │  │
-│  │  └────┬────┘ └────┬────┘           │  │
-│  └───────┼───────────┼────────────────┘  │
-└──────────┼───────────┼────────────────────┘
-           │           │
-     ┌─────▼────┐ ┌────▼─────┐
-     │MCP Server│ │MCP Server│
-     │(文件系统) │ │(数据库)   │
-     └──────────┘ └──────────┘
+```mermaid
+flowchart TD
+    subgraph Host["Host（Claude Desktop / VS Code / IDE）"]
+        subgraph Client["MCP Client"]
+            C1["Client 1"]
+            C2["Client 2"]
+        end
+    end
+    C1 --> S1["MCP Server\n（文件系统）"]
+    C2 --> S2["MCP Server\n（数据库）"]
 ```
 
 - **Host**：终端用户使用的应用程序，负责管理 MCP Client 实例

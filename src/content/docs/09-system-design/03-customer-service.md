@@ -24,33 +24,17 @@ description: "系统设计面试题 — 设计一个支持意图路由、多 Age
 
 ## 架构设计
 
-```
-多渠道接入
-  ↓
-┌────────────────────────┐
-│    API Gateway         │
-│  (认证 + 限流 + 路由)    │
-└───────────┬────────────┘
-            ↓
-┌────────────────────────┐
-│   Session Manager      │
-│  (会话状态 + 上下文)     │
-└───────────┬────────────┘
-            ↓
-┌────────────────────────┐
-│   Intent Router        │
-│  (意图分类 + 路由)       │
-└───┬───┬───┬───┬────────┘
-    ↓   ↓   ↓   ↓
-  订单  退款  技术  FAQ
-  Agent Agent Agent Agent
-    ↓
-┌────────────────────────┐
-│   Escalation Manager   │
-│  (转接决策 + 排队)       │
-└───────────┬────────────┘
-            ↓
-       人工客服工作台
+```mermaid
+flowchart TD
+    Channel["多渠道接入"] --> GW["API Gateway\n（认证 + 限流 + 路由）"]
+    GW --> SM["Session Manager\n（会话状态 + 上下文）"]
+    SM --> IR["Intent Router\n（意图分类 + 路由）"]
+    IR --> Order["订单 Agent"]
+    IR --> Refund["退款 Agent"]
+    IR --> Tech["技术 Agent"]
+    IR --> FAQ["FAQ Agent"]
+    Order --> Esc["Escalation Manager\n（转接决策 + 排队）"]
+    Esc --> Human["人工客服工作台"]
 ```
 
 ## 核心组件设计

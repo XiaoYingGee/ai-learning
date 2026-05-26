@@ -15,29 +15,15 @@ description: "理解 Transformer 的核心组件：Self-Attention、Multi-Head A
 
 ## 整体架构：Encoder-Decoder
 
-```
-┌─────────────────────────────────────────────┐
-│              Transformer 架构                │
-│                                             │
-│  ┌──────────────┐    ┌──────────────────┐   │
-│  │   Encoder    │    │     Decoder      │   │
-│  │              │    │                  │   │
-│  │ ┌──────────┐ │    │ ┌──────────────┐ │   │
-│  │ │ Self-    │ │    │ │ Masked Self- │ │   │
-│  │ │ Attention│ │    │ │ Attention    │ │   │
-│  │ └────┬─────┘ │    │ └──────┬───────┘ │   │
-│  │      ↓       │    │        ↓         │   │
-│  │ ┌──────────┐ │    │ ┌──────────────┐ │   │
-│  │ │ Feed-   │ │───→│ │ Cross-       │ │   │
-│  │ │ Forward │ │    │ │ Attention    │ │   │
-│  │ └──────────┘ │    │ └──────┬───────┘ │   │
-│  │   × N 层     │    │        ↓         │   │
-│  └──────────────┘    │ ┌──────────────┐ │   │
-│                      │ │ Feed-Forward │ │   │
-│                      │ └──────────────┘ │   │
-│                      │   × N 层         │   │
-│                      └──────────────────┘   │
-└─────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Encoder["Encoder × N 层"]
+        SA["Self-Attention"] --> FF1["Feed-Forward"]
+    end
+    subgraph Decoder["Decoder × N 层"]
+        MSA["Masked Self-Attention"] --> CA["Cross-Attention"] --> FF2["Feed-Forward"]
+    end
+    FF1 -->|"编码输出"| CA
 ```
 
 - **Encoder**：将输入文本编码为连续的向量表示。BERT 只用了 Encoder。
@@ -84,11 +70,17 @@ def self_attention(Q, K, V):
 
 单个 Attention 只能捕捉一种关联模式。Multi-Head Attention 让模型同时关注不同类型的关系：
 
-```
-输入 ──→ [Head 1: 语法关系]  ──┐
-     ──→ [Head 2: 语义关系]  ──┼──→ 拼接 ──→ 线性变换 ──→ 输出
-     ──→ [Head 3: 指代关系]  ──┘
-     ──→ [Head h: ...]       ──┘
+```mermaid
+flowchart LR
+    Input["输入"] --> H1["Head 1: 语法关系"]
+    Input --> H2["Head 2: 语义关系"]
+    Input --> H3["Head 3: 指代关系"]
+    Input --> Hh["Head h: ..."]
+    H1 --> Concat["拼接"]
+    H2 --> Concat
+    H3 --> Concat
+    Hh --> Concat
+    Concat --> Linear["线性变换"] --> Output["输出"]
 ```
 
 每个 Head 独立学习不同的 Q/K/V 变换，最后拼接起来。这就像让多个专家各自分析同一段文本，然后综合意见。

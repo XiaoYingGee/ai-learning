@@ -7,25 +7,21 @@ description: "Agent 框架选型决策树、场景推荐、对比表与迁移成
 
 选择 Agent 框架不应该从"哪个最热门"开始，而应该从**你的实际需求**出发。以下决策树帮你快速缩小范围：
 
-```
-你需要 Agent 框架吗？
-├── 只需要单次 LLM 调用 → 直接用模型 SDK，不需要框架
-├── 需要工具调用但流程简单 → 模型原生 Tool Use 即可
-└── 需要复杂编排/多 Agent → 继续往下 ↓
-
-你的模型偏好？
-├── 只用 Claude → Claude Agent SDK
-├── 只用 GPT → OpenAI Agents SDK
-├── 只用 Gemini → Google ADK
-├── 需要多模型切换 → LangChain / LangGraph
-└── 无偏好 → 继续往下 ↓
-
-你的团队规模和技术栈？
-├── 个人/小团队快速原型 → CrewAI 或 LangChain
-├── 微软技术栈企业 → Semantic Kernel
-├── AWS 技术栈企业 → Strands Agents
-├── GCP 技术栈企业 → Google ADK
-└── 需要细粒度控制 → 自己实现（参考 Chapter 6）
+```mermaid
+flowchart TD
+    Start{"需要 Agent 框架吗？"} -->|"只需单次 LLM 调用"| SDK["直接用模型 SDK"]
+    Start -->|"简单工具调用"| Native["模型原生 Tool Use"]
+    Start -->|"复杂编排 / 多 Agent"| Model{"模型偏好？"}
+    Model -->|"只用 Claude"| Claude["Claude Agent SDK"]
+    Model -->|"只用 GPT"| OpenAI["OpenAI Agents SDK"]
+    Model -->|"只用 Gemini"| ADK["Google ADK"]
+    Model -->|"多模型切换"| LC["LangChain / LangGraph"]
+    Model -->|"无偏好"| Team{"团队规模和技术栈？"}
+    Team -->|"个人 / 小团队"| CrewAI["CrewAI 或 LangChain"]
+    Team -->|"微软技术栈"| SK["Semantic Kernel"]
+    Team -->|"AWS 技术栈"| Strands["Strands Agents"]
+    Team -->|"GCP 技术栈"| ADK2["Google ADK"]
+    Team -->|"需要细粒度控制"| DIY["自己实现"]
 ```
 
 ## 按场景推荐
