@@ -9,6 +9,10 @@ description: "Eval-Driven Development、评测维度、自动化评测与 Human-
 
 核心理念：**在写 Prompt 之前先写评测，用评测指标驱动迭代**。
 
+:::tip[相关章节：RAG 评测指标]
+如果你的 Agent 包含 RAG 管线，[第四章 RAG 评测](/04-rag/04-evaluation/) 中介绍的 Faithfulness、Answer Relevance、Context Precision 等指标可以直接用在本章的评测框架中，作为 RAG 维度的评分标准。
+:::
+
 ```
 定义评测集 → 写初始 Prompt → 运行评测 → 分析结果 → 优化 Prompt → 重复
 ```
@@ -160,23 +164,26 @@ for dim in all_dimensions:
 
 ## 自测问题
 
-<details>
-<summary>1. 为什么 LLM-as-Judge 比字符串匹配更适合评测 Agent 输出？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么 LLM-as-Judge 比字符串匹配更适合评测 Agent 输出？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">LLM 输出是非确定性的，同一个问题可能有多种正确的表述方式。字符串匹配只能检查精确一致；LLM-as-Judge 能理解语义，判断不同表述是否表达了相同含义。</div>
+  </details>
+</div>
 
-LLM 输出是非确定性的，同一个问题可能有多种正确的表述方式。字符串匹配只能检查精确一致；LLM-as-Judge 能理解语义，判断不同表述是否表达了相同含义。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Eval-Driven Development 中，为什么要先写评测再写 Prompt？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">先定义"什么是好的输出"，才能客观衡量 Prompt 的效果。否则容易陷入主观判断，每次修改都不确定是改好了还是改坏了。评测集就像单元测试，是 Prompt 迭代的安全网。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. Eval-Driven Development 中，为什么要先写评测再写 Prompt？</summary>
-
-先定义"什么是好的输出"，才能客观衡量 Prompt 的效果。否则容易陷入主观判断，每次修改都不确定是改好了还是改坏了。评测集就像单元测试，是 Prompt 迭代的安全网。
-</details>
-
-<details>
-<summary>3. 用 GPT-4o 作为 Judge 评测 GPT-4o 生成的内容，有什么潜在问题？</summary>
-
-模型可能对自己风格的输出有偏好（self-preference bias），给出偏高的分数。最佳实践是用不同模型做 Judge（如用 Claude 评测 GPT 的输出），或结合人工评测交叉验证。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：用 GPT-4o 作为 Judge 评测 GPT-4o 生成的内容，有什么潜在问题？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">模型可能对自己风格的输出有偏好（self-preference bias），给出偏高的分数。最佳实践是用不同模型做 Judge（如用 Claude 评测 GPT 的输出），或结合人工评测交叉验证。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 

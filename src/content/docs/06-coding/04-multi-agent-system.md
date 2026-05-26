@@ -7,6 +7,10 @@ description: "搭建 Orchestrator + Worker 模式的多 Agent 系统，含完整
 
 本文实现一个 **Orchestrator + Worker** 模式的多 Agent 系统：
 
+:::tip[理论回顾：Multi-Agent 设计模式]
+Orchestrator-Worker、平行协作、辩论式等多 Agent 架构模式已在 [第二章 Multi-Agent 模式](/02-prompt/04-multi-agent/) 中系统介绍。本章选取最常用的 Orchestrator + Worker 模式，用完整 Python 代码演示从消息传递到任务编排的全过程。
+:::
+
 - **Orchestrator（编排器）**：接收用户请求，分解任务，分配给合适的 Worker，汇总结果
 - **Worker（工作者）**：专注于特定领域的专业 Agent
 
@@ -153,7 +157,11 @@ class OrchestratorAgent(BaseAgent):
         self.workers = workers
 
     def dispatch(self, worker_name: str, task_content: str) -> str:
-        """向 Worker 分发任务并获取结果"""
+        """向 Worker 分发任务并获取结果
+        
+        设计要点：Orchestrator 是唯一与 Worker 交互的角色，
+        Worker 之间互不感知——这保证了流程清晰且易于调试。
+        """
         worker = self.workers[worker_name]
         task_msg = Message(
             sender=self.name,
@@ -235,23 +243,26 @@ if __name__ == "__main__":
 
 ## 自测问题
 
-<details>
-<summary>1. 为什么 Worker 之间不直接通信，而是都通过 Orchestrator？</summary>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么 Worker 之间不直接通信，而是都通过 Orchestrator？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">这是 Orchestrator 模式的核心设计——中心化控制。好处是：流程清晰、易于调试、容易添加全局策略（如超时、重试）。缺点是 Orchestrator 成为单点瓶颈。</div>
+  </details>
+</div>
 
-这是 Orchestrator 模式的核心设计——中心化控制。好处是：流程清晰、易于调试、容易添加全局策略（如超时、重试）。缺点是 Orchestrator 成为单点瓶颈。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：如果审核不通过，如何实现"打回重写"的循环？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">在 Orchestrator 的 run 方法中，解析审核结果的评分。如果评分低于阈值，将审核意见发回给 Writer，让其修改后再次提交审核。设置最大循环次数防止死循环。</div>
+  </details>
+</div>
 
-<details>
-<summary>2. 如果审核不通过，如何实现"打回重写"的循环？</summary>
-
-在 Orchestrator 的 run 方法中，解析审核结果的评分。如果评分低于阈值，将审核意见发回给 Writer，让其修改后再次提交审核。设置最大循环次数防止死循环。
-</details>
-
-<details>
-<summary>3. 这个系统的 Token 消耗主要在哪些环节？如何优化？</summary>
-
-每个 Agent 调用 LLM 都消耗 Token，尤其是传递完整研究材料和文章时。优化方法：摘要压缩（研究结果先摘要再传给 Writer）、使用更小的模型做审核、缓存重复查询。
-</details>
+<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+  <details>
+    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：这个系统的 Token 消耗主要在哪些环节？如何优化？</summary>
+    <div style="margin-top:.8rem;font-size:.9rem;">每个 Agent 调用 LLM 都消耗 Token，尤其是传递完整研究材料和文章时。优化方法：摘要压缩（研究结果先摘要再传给 Writer）、使用更小的模型做审核、缓存重复查询。</div>
+  </details>
+</div>
 
 ## 延伸阅读
 
