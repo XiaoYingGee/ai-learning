@@ -3,6 +3,10 @@ title: "上下文窗口与 KV Cache"
 description: "理解 LLM 的上下文窗口限制、KV Cache 加速原理、长文本处理策略，以及 Prompt Caching 机制。"
 ---
 
+:::tip[与其他章节的关联]
+上下文窗口限制是 [第 4 章 RAG](/04-rag/02-rag-basics/) 存在的根本原因——当文档超出窗口大小时，必须用检索替代全文输入。KV Cache 的显存问题直接影响 [第 7 章生产化](/07-production/02-cost-control/) 中的成本和部署策略。Prompt Caching 的实战用法在 [第 7 章成本控制](/07-production/02-cost-control/) 中展开。
+:::
+
 ## 什么是上下文窗口？
 
 上下文窗口（Context Window）是 LLM 一次能"看到"的最大 token 数量，包括输入和输出的总和。

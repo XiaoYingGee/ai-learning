@@ -3,6 +3,10 @@ title: "Prompt Engineering"
 description: "掌握 LLM 提示工程核心技术：Zero-shot/Few-shot、Chain-of-Thought、ReAct Prompting、System Prompt 设计与 Prompt 版本管理。"
 ---
 
+:::tip[与其他章节的关联]
+Prompt Engineering 是使用 Agent 的基础技能。本章介绍的 CoT 和 ReAct 在 [第 2 章](/02-agent-patterns/02-react/) 中作为 Agent 设计模式深入讲解；System Prompt 的安全问题在 [第 8 章](/08-security/01-prompt-injection/) 中详细讨论。
+:::
+
 ## 什么是 Prompt Engineering？
 
 Prompt Engineering 是设计和优化输入提示以引导 LLM 产生期望输出的技术。类比：LLM 是一个能力极强但需要明确指令的实习生——你的指令（Prompt）越清晰具体，输出质量越高。

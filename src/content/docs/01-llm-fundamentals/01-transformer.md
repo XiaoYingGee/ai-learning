@@ -7,6 +7,10 @@ description: "理解 Transformer 的核心组件：Self-Attention、Multi-Head A
 LLM（Large Language Model，大语言模型）是指参数量巨大（通常数十亿到数万亿）的神经网络语言模型，如 GPT-4、Claude、LLaMA。它们通过海量文本训练，能够理解和生成自然语言。本指南中"模型"一词通常指 LLM。
 :::
 
+:::tip[与其他章节的关联]
+本章介绍的 Transformer 架构是所有后续章节的基础。[第 2 章](/02-agent-patterns/01-what-is-agent/) 中 Agent 的"推理"能力来自 Transformer 驱动的 LLM；[第 3 章](/03-tool-use/01-function-calling/) 的 Function Calling 依赖模型的生成能力；[第 4 章 RAG](/04-rag/02-rag-basics/) 中的 Embedding 模型也基于 Transformer。
+:::
+
 ## 为什么需要 Transformer？
 
 在 Transformer 出现之前，处理序列数据（如文本）的主流模型是 RNN 和 LSTM。想象你在读一本书：

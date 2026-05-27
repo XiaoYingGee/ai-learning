@@ -114,14 +114,14 @@ flowchart TD
     Q --> Keyword["关键词检索\n（BM25）"]
     Semantic --> RRF["Reciprocal Rank Fusion"]
     Keyword --> RRF
-
-:::note[术语：Reciprocal Rank Fusion (RRF)]
-**RRF（倒数排名融合）** 是一种将多个检索结果列表合并为统一排名的算法。公式为 $\text{score}(d) = \sum_r \frac{1}{k + \text{rank}_r(d)}$，其中 $k$ 通常取 60。RRF 的优势在于不需要对不同检索器的分数做归一化，简单高效且效果稳定。
-:::
     RRF --> TopK["Top-K 结果"]
     TopK --> Rerank["Reranker\n（Cross-encoder 重排序）"]
     Rerank --> Final["最终 Top-N 结果"]
 ```
+
+:::note[术语：Reciprocal Rank Fusion (RRF)]
+**RRF（倒数排名融合）** 是一种将多个检索结果列表合并为统一排名的算法。公式为 $\text{score}(d) = \sum_r \frac{1}{k + \text{rank}_r(d)}$，其中 $k$ 通常取 60。RRF 的优势在于不需要对不同检索器的分数做归一化，简单高效且效果稳定。
+:::
 
 **查询改写：**
 

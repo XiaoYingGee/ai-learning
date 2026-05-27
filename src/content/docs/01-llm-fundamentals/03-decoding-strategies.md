@@ -3,6 +3,10 @@ title: "解码策略"
 description: "LLM 如何一步步生成文本：Greedy Decoding、Temperature、Top-p/Top-k Sampling、Beam Search 及实际调参技巧。"
 ---
 
+:::tip[与其他章节的关联]
+解码策略直接影响 Agent 的行为：[第 2 章 ReAct 模式](/02-agent-patterns/02-react/) 中 Agent 的每步推理都依赖解码策略控制输出质量。生产环境中的调参技巧见 [第 7 章成本控制](/07-production/02-cost-control/)（Temperature 影响 token 消耗）。
+:::
+
 ## LLM 如何生成文本？
 
 大语言模型每次只生成**一个 token**。模型输出的是词表中每个 token 的概率分布，然后通过某种策略从中选择一个 token 作为输出。这个选择策略就是**解码策略（Decoding Strategy）**。
