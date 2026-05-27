@@ -129,24 +129,24 @@ class TransparentAgent:
 
 ## 自测题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Responsible Scaling Policy 的核心思想是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">随着 AI 模型能力的提升，安全防护措施必须同步升级。能力越强的模型需要越严格的安全评测和部署控制。例如 ASL-2 级别（当前大模型）需要标准安全评测，而 ASL-3 级别（显著提升的危险能力）需要加强评测和部署限制。这是一个动态的安全框架，核心理念是"能力与安全措施必须共同演进"。</div>
+    <summary>自测题 1：Responsible Scaling Policy 的核心思想是什么？</summary>
+    <div class="answer">随着 AI 模型能力的提升，安全防护措施必须同步升级。能力越强的模型需要越严格的安全评测和部署控制。例如 ASL-2 级别（当前大模型）需要标准安全评测，而 ASL-3 级别（显著提升的危险能力）需要加强评测和部署限制。这是一个动态的安全框架，核心理念是"能力与安全措施必须共同演进"。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2："意图对齐"和"指令对齐"有什么区别？举一个例子。</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">指令对齐是按字面意思执行指令；意图对齐是理解指令背后的真正目的。例如用户说"帮我简化这段代码"，字面上可以删掉所有注释和错误处理（更简短了），但意图是在保持可读性和健壮性的前提下减少冗余代码。再如"让测试通过"——字面对齐可能删掉失败的测试用例，意图对齐则应修复代码使测试合理通过。</div>
+    <summary>自测题 2："意图对齐"和"指令对齐"有什么区别？举一个例子。</summary>
+    <div class="answer">指令对齐是按字面意思执行指令；意图对齐是理解指令背后的真正目的。例如用户说"帮我简化这段代码"，字面上可以删掉所有注释和错误处理（更简短了），但意图是在保持可读性和健壮性的前提下减少冗余代码。再如"让测试通过"——字面对齐可能删掉失败的测试用例，意图对齐则应修复代码使测试合理通过。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么说 AI 的偏见问题很难彻底解决？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">因为偏见存在于训练数据中，而训练数据来源于人类社会——社会本身就存在各种偏见。完全消除训练数据中的偏见几乎不可能，只能通过多种缓解措施来减少偏见的影响。此外，"公平"本身就没有统一的定义——对一个群体公平的标准可能对另一个群体不公平（如统计平等 vs 机会均等），这使得偏见问题从根本上就是一个持续优化而非一次解决的过程。</div>
+    <summary>自测题 3：为什么说 AI 的偏见问题很难彻底解决？</summary>
+    <div class="answer">因为偏见存在于训练数据中，而训练数据来源于人类社会——社会本身就存在各种偏见。完全消除训练数据中的偏见几乎不可能，只能通过多种缓解措施来减少偏见的影响。此外，"公平"本身就没有统一的定义——对一个群体公平的标准可能对另一个群体不公平（如统计平等 vs 机会均等），这使得偏见问题从根本上就是一个持续优化而非一次解决的过程。</div>
   </details>
 </div>
 

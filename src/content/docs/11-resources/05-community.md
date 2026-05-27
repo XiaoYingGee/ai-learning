@@ -4,9 +4,9 @@ description: "AI Agent 相关的博客、论坛、Discord 和中文社区资源"
 ---
 
 :::tip[与其他章节的关联]
-- Anthropic Blog 的 Tool Use 和 MCP 文章 → [ch05](/05-tool-use/) 和 [ch06](/06-mcp/) 的补充阅读
-- LangChain Blog 的 Agent 架构文章 → [ch02 设计模式](/02-patterns/) 的实践案例
-- Reddit r/LocalLLaMA → 本地部署和量化相关，补充 [ch01 LLM 基础](/01-llm-basics/)
+- Anthropic Blog 的 Tool Use 和 MCP 文章 → [ch05](/03-tool-use/01-function-calling/) 和 [ch06](/03-tool-use/03-mcp/) 的补充阅读
+- LangChain Blog 的 Agent 架构文章 → [ch02 设计模式](/02-agent-patterns/01-what-is-agent/) 的实践案例
+- Reddit r/LocalLLaMA → 本地部署和量化相关，补充 [ch01 LLM 基础](/01-llm-fundamentals/01-transformer/)
 :::
 
 ## 官方博客

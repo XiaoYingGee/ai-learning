@@ -186,30 +186,30 @@ def classify(user_input: str, categories: list[str]) -> dict:
 - 用 LangSmith、Braintrust 等工具追踪 Prompt 效果
 - 考虑使用 Prompt Management 平台（如 Anthropic Console）
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Few-shot 示例的数量越多越好吗？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Few-shot 示例的数量越多越好吗？</summary>
+    <div class="answer">
       不是。过多示例会消耗宝贵的上下文窗口，且可能引入偏见——模型会过度拟合示例的表面模式（比如总是输出和示例相同的长度或格式），而忽略任务本身的要求。通常 3-5 个覆盖不同情况的高质量示例效果最佳。<br/><br/>
       关键在于示例的<strong>多样性和代表性</strong>，而非数量。比如做情感分类时，与其给 10 个正面示例，不如给 2 个正面 + 2 个负面 + 1 个边界情况（如"食物不错但服务很差"），这样模型能更好地理解判断标准。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：CoT 对所有任务都有效吗？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：CoT 对所有任务都有效吗？</summary>
+    <div class="answer">
       不是。CoT 主要对需要<strong>多步推理</strong>的复杂任务有效，如数学题（需要列方程、分步计算）、逻辑推理（需要逐条分析条件）、代码理解（需要追踪变量状态）。对于简单的分类、翻译、信息提取等任务，CoT 可能反而增加延迟和 token 消耗而不提升质量。<br/><br/>
       此外，CoT 的效果与模型规模高度相关。研究表明，CoT 在参数量超过 100B 的模型上效果最显著（如 GPT-4、Claude），而小模型（如 7B）使用 CoT 时可能产生看似合理但实际错误的推理链，反而降低准确率。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：ReAct 和纯 CoT 的核心区别是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：ReAct 和纯 CoT 的核心区别是什么？</summary>
+    <div class="answer">
       CoT 只有内部推理（Reasoning）——模型基于已有知识进行思考，就像闭卷考试。ReAct 增加了外部行动（Acting）——模型可以调用工具（搜索引擎、计算器、数据库 API）获取实时信息，然后基于观察结果继续推理，更像开卷考试。<br/><br/>
       举例：问"2024 年诺贝尔物理学奖得主是谁？"，纯 CoT 只能说"我的知识截止到 XX 年，无法回答"；ReAct 则会执行搜索操作获取最新信息，再给出准确答案。这种"想-做-看"的循环也是 AI Agent 的核心工作范式。
     </div>

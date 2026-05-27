@@ -1,0 +1,40 @@
+/* Self-test question cards (blue) */
+.card-quiz {
+  border-left: 4px solid #60a5fa;
+  padding: .8rem 1.2rem;
+  margin: .8rem 0;
+  background: rgba(96, 165, 250, 0.06);
+  border-radius: 0 8px 8px 0;
+}
+.card-quiz summary {
+  font-weight: bold;
+  color: #60a5fa;
+  cursor: pointer;
+}
+.card-quiz .answer {
+  margin-top: .8rem;
+  font-size: .9rem;
+}
+
+/* Interview question cards (orange) */
+.card-interview {
+  border-left: 4px solid #f97316;
+  padding: .8rem 1.2rem;
+  margin: .8rem 0;
+  background: rgba(249, 115, 22, 0.06);
+  border-radius: 0 8px 8px 0;
+}
+.card-interview .question {
+  font-weight: bold;
+  color: #f97316;
+  margin-bottom: .5rem;
+}
+.card-interview summary {
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: .9rem;
+}
+.card-interview .answer {
+  margin-top: .5rem;
+  font-size: .9rem;
+}

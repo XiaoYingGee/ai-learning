@@ -135,28 +135,28 @@ def simple_agent(user_query: str, tools: dict, max_steps: int = 5):
     return "达到最大步数，任务未完成"
 ```
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Copilot 和 Agent 的核心区别是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Copilot 和 Agent 的核心区别是什么？</summary>
+    <div class="answer">
       核心区别在于"谁在驾驶座"。Copilot 是人类主导、AI 辅助——人类决定做什么，AI 帮忙怎么做（如代码补全）。Agent 是 AI 主导、人类监督——人类设定目标，AI 自主规划和执行具体步骤。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Agent 的"记忆"分为哪两类？各自如何实现？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：Agent 的"记忆"分为哪两类？各自如何实现？</summary>
+    <div class="answer">
       短期记忆（Working Memory）：存储在 LLM（参见 <a href="/01-llm-fundamentals/01-transformer/#术语llm">第 1 章术语释义</a>）的上下文窗口中，包括当前对话历史和推理过程，会话结束后消失。长期记忆（Long-term Memory）：存储在外部系统（如向量数据库、文件系统）中，持久化保存用户偏好、历史经验等，跨会话可用。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么建议从低自主性等级开始？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：为什么建议从低自主性等级开始？</summary>
+    <div class="answer">
       1) 高自主性 Agent 更难调试和控制；2) 错误会在自主循环中累积放大；3) 成本更高（多轮 LLM 调用）；4) 大多数实际需求不需要完全自主。简单的工具调用（Level 2）就能解决 80% 的场景，且更可靠、更经济。
     </div>
   </details>

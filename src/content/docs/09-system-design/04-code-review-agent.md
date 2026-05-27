@@ -4,7 +4,7 @@ description: "系统设计面试题 — 设计一个集成 PR 工作流的自动
 ---
 
 :::tip[与其他章节的关联]
-- **ch02 设计模式**：审查流程使用 Pipeline 模式（静态分析 -> LLM 审查 -> 合并），详见 [Agent 设计模式](/02-patterns/)
+- **ch02 设计模式**：审查流程使用 Pipeline 模式（静态分析 -> LLM 审查 -> 合并），详见 [Agent 设计模式](/02-agent-patterns/01-what-is-agent/)
 - **ch07 生产化**：误报控制和反馈学习涉及评估与监控，详见 [生产化章节](/07-production/)
 :::
 

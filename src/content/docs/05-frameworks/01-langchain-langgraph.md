@@ -4,8 +4,8 @@ description: "LangChain 核心概念与 LangGraph 有向图编排模式详解"
 ---
 
 :::tip[与其他章节的关联]
-- LangChain 的 Chain 和 Agent 概念直接对应 [ch02 Agent 模式](/02-agent-basics/02-agent-patterns/) 中的 ReAct 等模式
-- LangChain 的 Tool 抽象与 [ch03 工具调用](/03-tools-mcp/01-tool-calling/) 中的 Tool Use 机制一致
+- LangChain 的 Chain 和 Agent 概念直接对应 [ch02 Agent 模式](/02-agent-patterns/01-what-is-agent/) 中的 ReAct 等模式
+- LangChain 的 Tool 抽象与 [ch03 工具调用](/03-tool-use/01-function-calling/) 中的 Tool Use 机制一致
 - LangChain 内置了完整的 RAG 支持，包括 [ch04 中介绍的分块、检索、Re-ranking](/04-rag/02-rag-basics/) 等能力
 - LangGraph 的有向图模式可以实现 [ch04-05 Agentic RAG](/04-rag/05-agentic-rag/) 中的路由式和迭代式 RAG
 :::
@@ -137,24 +137,24 @@ LangSmith 是 LangChain 团队推出的 LLM 应用可观测性平台，提供 Tr
 - **版本不兼容**：LangChain API 变动频繁，`langchain` 与 `langchain-core`、`langchain-community` 的版本依赖关系复杂。建议锁定版本并关注 changelog。
 - **隐式行为难调试**：LCEL 的 `|` 语法虽然简洁，但中间步骤的输入输出不直观。可用 `RunnablePassthrough` 或 LangSmith 来检查中间数据。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：LangChain 的 Chain 和 LangGraph 的 Graph 有什么本质区别？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">Chain 是线性管线，数据从头到尾单向流动；Graph 是有向图，支持条件分支和循环，能表达更复杂的控制流。</div>
+    <summary>自测题 1：LangChain 的 Chain 和 LangGraph 的 Graph 有什么本质区别？</summary>
+    <div class="answer">Chain 是线性管线，数据从头到尾单向流动；Graph 是有向图，支持条件分支和循环，能表达更复杂的控制流。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：LangGraph 的 State 在整个图执行过程中扮演什么角色？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">State 是所有节点之间共享的数据载体。每个节点读取 State、执行操作、更新 State，然后传递给下一个节点。它相当于整个图的"全局上下文"。</div>
+    <summary>自测题 2：LangGraph 的 State 在整个图执行过程中扮演什么角色？</summary>
+    <div class="answer">State 是所有节点之间共享的数据载体。每个节点读取 State、执行操作、更新 State，然后传递给下一个节点。它相当于整个图的"全局上下文"。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：什么情况下不推荐使用 LangChain？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">当任务很简单（比如单次 LLM 调用）时，直接用 SDK 即可，LangChain 的抽象层反而增加了不必要的复杂度和调试难度。</div>
+    <summary>自测题 3：什么情况下不推荐使用 LangChain？</summary>
+    <div class="answer">当任务很简单（比如单次 LLM 调用）时，直接用 SDK 即可，LangChain 的抽象层反而增加了不必要的复杂度和调试难度。</div>
   </details>
 </div>
 

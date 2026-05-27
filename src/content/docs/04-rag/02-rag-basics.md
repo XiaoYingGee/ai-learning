@@ -4,8 +4,8 @@ description: "理解 RAG 的完整流程、Embedding 模型选择、检索方式
 ---
 
 :::tip[与其他章节的关联]
-- RAG 的核心依赖 **Embedding** 技术，详见 [ch01 Embedding 与 Tokenization](/01-llm-basics/03-embedding-tokenization/)
-- RAG 可以作为 Agent 的工具使用，参见 [ch02 Agent 模式](/02-agent-basics/02-agent-patterns/)
+- RAG 的核心依赖 **Embedding** 技术，详见 [ch01 Embedding 与 Tokenization](/01-llm-fundamentals/02-tokenization-embedding/)
+- RAG 可以作为 Agent 的工具使用，参见 [ch02 Agent 模式](/02-agent-patterns/01-what-is-agent/)
 - 分块策略与向量数据库选型详见 [ch04-03](/04-rag/03-chunking-vectordb/)
 :::
 
@@ -37,7 +37,7 @@ flowchart TD
 
 ## Embedding 模型选择
 
-Embedding 模型将文本转换为向量（一组数字），语义相似的文本在向量空间中距离更近。关于 Embedding 的原理，参见 [ch01 Embedding 基础](/01-llm-basics/03-embedding-tokenization/)。
+Embedding 模型将文本转换为向量（一组数字），语义相似的文本在向量空间中距离更近。关于 Embedding 的原理，参见 [ch01 Embedding 基础](/01-llm-fundamentals/02-tokenization-embedding/)。
 
 | 模型 | 维度 | 特点 | 价格 |
 |------|------|------|------|
@@ -156,24 +156,24 @@ print(answer)
 - **分块太小丢上下文**：每块只有一两句话，LLM 拿到后无法理解完整语境。建议至少 300 字符。
 - **不处理特殊格式**：PDF 表格、代码块、图片说明等结构化内容直接当纯文本切分，损失大量信息。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：RAG 解决了 LLM 的哪些核心问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">知识过时、知识缺失、幻觉问题、缺乏引用溯源。</div>
+    <summary>自测题 1：RAG 解决了 LLM 的哪些核心问题？</summary>
+    <div class="answer">知识过时、知识缺失、幻觉问题、缺乏引用溯源。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：语义搜索和关键词搜索各自的优劣是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">语义搜索理解同义词和语义但可能忽略关键词精确匹配；关键词搜索精确但不理解语义。混合搜索兼顾两者。</div>
+    <summary>自测题 2：语义搜索和关键词搜索各自的优劣是什么？</summary>
+    <div class="answer">语义搜索理解同义词和语义但可能忽略关键词精确匹配；关键词搜索精确但不理解语义。混合搜索兼顾两者。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：RAG 的离线阶段和在线阶段分别做什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">离线阶段将文档分块、生成 Embedding、存入向量数据库；在线阶段将用户问题生成 Embedding、检索相似文档、将文档作为上下文让 LLM 生成回答。</div>
+    <summary>自测题 3：RAG 的离线阶段和在线阶段分别做什么？</summary>
+    <div class="answer">离线阶段将文档分块、生成 Embedding、存入向量数据库；在线阶段将用户问题生成 Embedding、检索相似文档、将文档作为上下文让 LLM 生成回答。</div>
   </details>
 </div>
 

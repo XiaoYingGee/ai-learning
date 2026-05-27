@@ -153,28 +153,28 @@ async def handle_parallel_calls(tool_calls):
 
 ---
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么工具的 description 比 name 更重要？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：为什么工具的 description 比 name 更重要？</summary>
+    <div class="answer">
       LLM 主要依赖 description 来理解工具的用途、适用场景和使用时机，name 只是标识符。一个叫 <code>do_stuff</code> 但描述清晰的工具，比一个叫 <code>search_products</code> 但描述模糊的工具更容易被正确调用。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：当系统有 50 个工具时，应该怎么处理？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：当系统有 50 个工具时，应该怎么处理？</summary>
+    <div class="answer">
       使用分层路由（先用轻量级 LLM 把工具分类，再把相关类别的工具传给主 LLM）或动态加载（根据对话上下文只加载相关工具）。比如用户在聊订单，就只加载订单相关的 5 个工具，而不是全部 50 个。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：并行工具调用的前提条件是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：并行工具调用的前提条件是什么？</summary>
+    <div class="answer">
       多个工具调用之间没有依赖关系，即后一个调用不需要前一个的结果。例如"查北京和上海天气"可以并行，但"先查用户 ID，再用 ID 查订单"必须串行。
     </div>
   </details>

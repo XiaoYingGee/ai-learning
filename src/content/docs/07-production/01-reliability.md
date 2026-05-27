@@ -13,7 +13,7 @@ description: "Agent 死循环检测、重试策略、降级机制与幂等性设
 - 相同输入不保证相同输出
 
 :::tip[相关章节：Tool Use 的错误处理]
-工具调用失败是 Agent 不可靠的主要来源之一。[第三章 Tool Use](/03-model-api/03-function-calling/) 中介绍了模型如何声明和调用工具——本章在此基础上补充生产环境的重试、降级和幂等策略。
+工具调用失败是 Agent 不可靠的主要来源之一。[第三章 Tool Use](/03-tool-use/01-function-calling/) 中介绍了模型如何声明和调用工具——本章在此基础上补充生产环境的重试、降级和幂等策略。
 :::
 
 > **实战教训**：一个真实的案例——某团队上线 Agent 后发现，在网络抖动期间 Agent 会连续重试同一个"发送邮件"工具，导致同一封邮件被发送了 17 次。这就是为什么幂等性设计不是"锦上添花"，而是**上线前必做**。
@@ -174,24 +174,24 @@ class IdempotentExecutor:
 
 ## 自测问题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：指数退避中的 jitter（随机抖动）解决什么问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">避免惊群效应。如果多个客户端同时遇到错误并以相同的延迟重试，它们会在同一时刻再次涌入服务端。随机抖动让重试时间错开。</div>
+    <summary>自测题 1：指数退避中的 jitter（随机抖动）解决什么问题？</summary>
+    <div class="answer">避免惊群效应。如果多个客户端同时遇到错误并以相同的延迟重试，它们会在同一时刻再次涌入服务端。随机抖动让重试时间错开。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么降级策略的最后一层是规则引擎而不是更小的模型？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">规则引擎不依赖任何外部 API，是完全自主可控的。即使所有模型服务都宕机，规则引擎仍然可以提供基本的回复，确保系统不会完全无响应。</div>
+    <summary>自测题 2：为什么降级策略的最后一层是规则引擎而不是更小的模型？</summary>
+    <div class="answer">规则引擎不依赖任何外部 API，是完全自主可控的。即使所有模型服务都宕机，规则引擎仍然可以提供基本的回复，确保系统不会完全无响应。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：哪些工具操作需要幂等性保护？哪些不需要？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">有副作用的操作（写数据库、发邮件、转账）需要幂等性保护；只读操作（查询天气、搜索）不需要，因为多次执行不会造成额外影响。</div>
+    <summary>自测题 3：哪些工具操作需要幂等性保护？哪些不需要？</summary>
+    <div class="answer">有副作用的操作（写数据库、发邮件、转账）需要幂等性保护；只读操作（查询天气、搜索）不需要，因为多次执行不会造成额外影响。</div>
   </details>
 </div>
 

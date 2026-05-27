@@ -6,7 +6,7 @@ description: "顶尖大学 AI Agent 相关课程推荐，涵盖 Berkeley、Stanf
 :::tip[与其他章节的关联]
 - Berkeley LLM Agents 课程覆盖本指南 ch01-ch08 的大部分内容，适合作为系统性补充
 - Stanford CS224G 侧重工程化落地，与 [ch07 生产化](/07-production/) 互补
-- Stanford CS329A 的自我改进主题对应 [ch02 Reflection 模式](/02-patterns/)
+- Stanford CS329A 的自我改进主题对应 [ch02 Reflection 模式](/02-agent-patterns/01-what-is-agent/)
 :::
 
 ## Berkeley 课程

@@ -5,8 +5,8 @@ description: "6 周 AI Agent 面试冲刺计划，按时间线安排每周学习
 
 :::tip[与其他章节的关联]
 - 每周的学习内容都对应本指南的具体章节，按路线图顺序即可系统覆盖所有面试考点
-- 第 1 周 → [ch01 LLM 基础](/01-llm-basics/)，第 2 周 → [ch02 设计模式](/02-patterns/) + [ch05 Tool Use](/05-tool-use/) + [ch06 MCP](/06-mcp/)
-- 第 3-4 周 → [ch04 RAG](/04-rag/) + [ch03 记忆](/03-memory/)，第 5 周 → [ch07 生产化](/07-production/) + [ch08 安全](/08-security/)
+- 第 1 周 → [ch01 LLM 基础](/01-llm-fundamentals/01-transformer/)，第 2 周 → [ch02 设计模式](/02-agent-patterns/01-what-is-agent/) + [ch05 Tool Use](/03-tool-use/01-function-calling/) + [ch06 MCP](/03-tool-use/03-mcp/)
+- 第 3-4 周 → [ch04 RAG](/04-rag/) + [ch03 记忆](/04-rag/01-memory-system/)，第 5 周 → [ch07 生产化](/07-production/) + [ch08 安全](/08-security/)
 - 第 6 周 → [ch09 系统设计](/09-system-design/) + [ch10 面试](/10-interview/)
 :::
 

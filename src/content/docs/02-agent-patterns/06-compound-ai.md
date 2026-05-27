@@ -175,33 +175,33 @@ def test_reranker():
     <div style="font-size:.9rem;">✓ 任务流程相对固定<br/>✓ 需要高可靠性和可观测性<br/>✓ 需要精细的成本控制<br/>✓ 有明确的质量评估标准<br/><em>例: RAG、数据管道、内容审核</em></div>
   </div>
   <div style="border:2px solid #f97316;border-radius:12px;padding:1.2rem 1.5rem;min-width:220px;">
-    <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">选择单 Agent 当：</div>
+    <div class="question">选择单 Agent 当：</div>
     <div style="font-size:.9rem;">✓ 任务开放性强，步骤不确定<br/>✓ 需要动态决策和工具选择<br/>✓ 用户交互复杂多变<br/>✓ 快速原型验证<br/><em>例: 编程助手、研究助手</em></div>
   </div>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Compound AI System 相比单一大模型调用的核心优势是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Compound AI System 相比单一大模型调用的核心优势是什么？</summary>
+    <div class="answer">
       核心优势是可控性和可优化性。每个组件可以独立监控、调试、替换和优化，而不是把所有希望寄托在一个大模型上。此外，可以针对不同组件使用不同成本的模型，实现整体成本优化。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：DSPy 解决了 Prompt Engineering 的什么问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：DSPy 解决了 Prompt Engineering 的什么问题？</summary>
+    <div class="answer">
       DSPy 解决了 Prompt Engineering 的不可复现和手动调优问题。传统方式需要人工反复修改 Prompt，过程不可复现且难以系统化优化。DSPy 将 Prompt 视为可优化的参数，通过 Optimizer 基于评估指标自动搜索最佳 Prompt 和 Few-shot 示例。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：一个 RAG 系统中有哪些组件可以独立优化？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：一个 RAG 系统中有哪些组件可以独立优化？</summary>
+    <div class="answer">
       1) 查询改写器：优化搜索查询；2) 检索器：更换检索算法或模型；3) 重排序器：提高相关性排序质量；4) 文档分块策略：调整 chunk size 和重叠；5) LLM 生成器：更换模型或优化 Prompt；6) 输出格式化：调整答案格式和引用方式。每个环节的改进都可以独立评估效果。
     </div>
   </details>

@@ -191,24 +191,24 @@ AI 回答: {response}
 
 ## 自测题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Red Teaming 和普通的功能测试有什么本质区别？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">功能测试验证系统在正常输入下是否按预期工作；Red Teaming 主动使用恶意和异常输入，试图让系统产生非预期行为。功能测试证明"能用"，Red Teaming 证明"难以滥用"。例如功能测试会检查"查询订单状态"是否返回正确结果，而 Red Teaming 会尝试通过订单查询接口注入指令来获取其他用户的数据。</div>
+    <summary>自测题 1：Red Teaming 和普通的功能测试有什么本质区别？</summary>
+    <div class="answer">功能测试验证系统在正常输入下是否按预期工作；Red Teaming 主动使用恶意和异常输入，试图让系统产生非预期行为。功能测试证明"能用"，Red Teaming 证明"难以滥用"。例如功能测试会检查"查询订单状态"是否返回正确结果，而 Red Teaming 会尝试通过订单查询接口注入指令来获取其他用户的数据。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Constitutional AI 为什么不直接用规则过滤，而是让 AI 自我审查？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">规则过滤是死板的——只能检查预定义的模式，无法理解上下文和语义。AI 自我审查能理解"为什么"某个回答有问题，可以发现规则无法覆盖的微妙违规。而且 AI 可以在保持回答有用性的同时修正问题部分，而不是简单地拒绝整个回答。例如一个关于化学的合理问题可能被关键词过滤误杀，但 CAI 能理解上下文是教育目的。</div>
+    <summary>自测题 2：Constitutional AI 为什么不直接用规则过滤，而是让 AI 自我审查？</summary>
+    <div class="answer">规则过滤是死板的——只能检查预定义的模式，无法理解上下文和语义。AI 自我审查能理解"为什么"某个回答有问题，可以发现规则无法覆盖的微妙违规。而且 AI 可以在保持回答有用性的同时修正问题部分，而不是简单地拒绝整个回答。例如一个关于化学的合理问题可能被关键词过滤误杀，但 CAI 能理解上下文是教育目的。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：RLHF 的"过度安全"问题是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">模型被训练为避免任何可能被人类评委标记为"有害"的回答，导致它对很多无害的正常问题也拒绝回答。例如拒绝讨论任何与"武器"相关的话题（即使是历史课作业），或拒绝解释药物的化学成分（即使是正常的科学问题）。这本质上是 Reward Model 的偏差——它学会了"拒绝比冒险回答更安全"的策略，降低了模型的实用性。</div>
+    <summary>自测题 3：RLHF 的"过度安全"问题是什么？</summary>
+    <div class="answer">模型被训练为避免任何可能被人类评委标记为"有害"的回答，导致它对很多无害的正常问题也拒绝回答。例如拒绝讨论任何与"武器"相关的话题（即使是历史课作业），或拒绝解释药物的化学成分（即使是正常的科学问题）。这本质上是 Reward Model 的偏差——它学会了"拒绝比冒险回答更安全"的策略，降低了模型的实用性。</div>
   </details>
 </div>
 

@@ -150,30 +150,30 @@ response = client.messages.create(
 # 第二次调用相同 system prompt 时，会命中缓存
 ```
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：KV Cache 为什么能加速推理？它的代价是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：KV Cache 为什么能加速推理？它的代价是什么？</summary>
+    <div class="answer">
       在自回归生成中，每生成一个新 token 都需要与所有历史 token 做 Attention 计算。KV Cache 将已计算的 Key 和 Value 矩阵缓存在显存中，新 token 只需计算自己的 K/V 并追加到缓存，避免了对所有历史 token 的重复计算，将每步复杂度从 $O(n^2)$ 降到 $O(n)$。<br/><br/>
       代价是显存消耗：以 LLaMA 70B 为例，128K 序列的 KV Cache 需要约 330GB 显存（单个请求）。这也是为什么需要 GQA/MQA 等技术来压缩 KV Cache 的大小，以及为什么长上下文推理通常需要多张 GPU。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：RAG 相比直接加大上下文窗口有什么优势？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：RAG 相比直接加大上下文窗口有什么优势？</summary>
+    <div class="answer">
       RAG 有四个核心优势：1) <strong>成本低</strong>：只检索最相关的几个片段放入上下文，而非把全部文档塞进去，大幅减少 token 消耗；2) <strong>知识可更新</strong>：向量数据库可以随时增删文档，无需重新训练模型；3) <strong>准确性</strong>：避免"Lost in the Middle"问题——研究表明模型对上下文中间部分的关注度显著低于首尾；4) <strong>可扩展</strong>：理论上可处理任意规模的知识库。<br/><br/>
       打个比方：加大上下文窗口就像把整个图书馆的书都搬到桌子上；RAG 则是先在图书馆检索目录，只把需要的几本拿过来翻阅，更高效也更精准。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Prompt Caching 的最佳实践是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：Prompt Caching 的最佳实践是什么？</summary>
+    <div class="answer">
       核心原则是<strong>把不变的长内容放在消息序列的开头，变化的用户输入放在末尾</strong>。这样不变的部分（System Prompt、参考文档、Few-shot 示例）在多次请求间可以命中缓存，只对新增的用户输入全价计算。Anthropic 的 Prompt Caching 可节省 90% 的费用并显著降低首 token 延迟。<br/><br/>
       需要注意：缓存有最小长度要求（Anthropic 要求至少 1024 tokens），且缓存前缀必须完全一致——哪怕改了一个字符，缓存就会失效。因此应避免在 System Prompt 中嵌入时间戳等动态内容。
     </div>

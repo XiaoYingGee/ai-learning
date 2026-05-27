@@ -8,9 +8,9 @@ description: "系统设计面试题 — 设计一个支持意图路由、多 Age
 :::
 
 :::tip[与其他章节的关联]
-- **ch02 设计模式**：Multi-Agent + Router 模式的典型应用，详见 [Agent 设计模式](/02-patterns/)
+- **ch02 设计模式**：Multi-Agent + Router 模式的典型应用，详见 [Agent 设计模式](/02-agent-patterns/01-what-is-agent/)
 - **ch04 RAG**：FAQ Agent 依赖 RAG 检索知识库，详见 [RAG 深入](/04-rag/)
-- **ch07 Guardrails**：情绪检测和内容审核使用 Guardrails 机制，详见 [Guardrails 章节](/07-production/03-guardrails/)
+- **ch07 Guardrails**：情绪检测和内容审核使用 Guardrails 机制，详见 [Guardrails 章节](/07-production/05-guardrails/)
 :::
 
 ## 题目

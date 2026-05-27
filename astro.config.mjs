@@ -7,6 +7,7 @@ import astroMermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://learning.xiaoyinggee.com',
 	markdown: {
 		remarkPlugins: [remarkMath],
 		rehypePlugins: [rehypeKatex],
@@ -15,6 +16,7 @@ export default defineConfig({
 		astroMermaid(),
 		starlight({
 			title: 'AI Agent 学习指南',
+			customCss: ['./src/styles/custom.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/XiaoYingGee/ai-learning' }],
 			head: [
 				{

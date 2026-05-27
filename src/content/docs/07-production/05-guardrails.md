@@ -182,24 +182,24 @@ flowchart TD
 
 ## 自测问题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么简单的关键词过滤不足以防御 Prompt Injection？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">攻击者可以用各种变体绕过关键词：拼写变化（igno re）、多语言混合、Unicode 同形字、Base64 编码等。需要结合模式匹配、LLM 分类器和多层防御。</div>
+    <summary>自测题 1：为什么简单的关键词过滤不足以防御 Prompt Injection？</summary>
+    <div class="answer">攻击者可以用各种变体绕过关键词：拼写变化（igno re）、多语言混合、Unicode 同形字、Base64 编码等。需要结合模式匹配、LLM 分类器和多层防御。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：输出中的幻觉 URL 为什么需要特别处理？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">LLM 可能生成看起来真实但实际不存在的 URL，用户点击后可能进入恶意网站或得到 404 错误，损害用户体验和信任。检测并标记未经验证的 URL 是必要的。</div>
+    <summary>自测题 2：输出中的幻觉 URL 为什么需要特别处理？</summary>
+    <div class="answer">LLM 可能生成看起来真实但实际不存在的 URL，用户点击后可能进入恶意网站或得到 404 错误，损害用户体验和信任。检测并标记未经验证的 URL 是必要的。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：分层防御中，哪一层最容易被绕过？为什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">基于关键词的输入检测层最容易被绕过，因为攻击者可以轻松变换措辞。最可靠的是格式合规校验层，因为它基于确定性规则（如 JSON Schema），不存在语义模糊性。</div>
+    <summary>自测题 3：分层防御中，哪一层最容易被绕过？为什么？</summary>
+    <div class="answer">基于关键词的输入检测层最容易被绕过，因为攻击者可以轻松变换措辞。最可靠的是格式合规校验层，因为它基于确定性规则（如 JSON Schema），不存在语义模糊性。</div>
   </details>
 </div>
 

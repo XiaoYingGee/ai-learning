@@ -193,24 +193,24 @@ Agent 应该只拥有完成任务所需的**最小权限**：
 
 ## 自测题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么不能让 LLM 自己判断 tenant_id？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">LLM 可能被 Prompt Injection 攻击，被诱导输出其他租户的 ID，从而导致跨租户数据泄露。tenant_id 必须在应用代码层面通过认证系统（如 SSO/LDAP）强制注入，完全绕过 LLM 的推理过程。这是"永不信任 LLM 输出的安全参数"原则的核心体现。</div>
+    <summary>自测题 1：为什么不能让 LLM 自己判断 tenant_id？</summary>
+    <div class="answer">LLM 可能被 Prompt Injection 攻击，被诱导输出其他租户的 ID，从而导致跨租户数据泄露。tenant_id 必须在应用代码层面通过认证系统（如 SSO/LDAP）强制注入，完全绕过 LLM 的推理过程。这是"永不信任 LLM 输出的安全参数"原则的核心体现。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：脱敏后再发给 LLM 有什么好处？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">即使 LLM 的 API 被窃听、日志被泄露，或者模型提供商的数据安全出现问题，敏感信息也不会暴露。同时还能避免 LLM 在回复中意外包含完整的手机号、身份证号等敏感数据。这种方法的额外好处是减少了合规风险——许多数据保护法规要求最小化敏感数据的传输和存储。</div>
+    <summary>自测题 2：脱敏后再发给 LLM 有什么好处？</summary>
+    <div class="answer">即使 LLM 的 API 被窃听、日志被泄露，或者模型提供商的数据安全出现问题，敏感信息也不会暴露。同时还能避免 LLM 在回复中意外包含完整的手机号、身份证号等敏感数据。这种方法的额外好处是减少了合规风险——许多数据保护法规要求最小化敏感数据的传输和存储。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么说"只读优先"是最重要的权限原则？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">只读操作不会造成不可逆的损害。即使 Agent 被劫持，最多也只能读取数据（可通过 ACL 进一步限制范围），不会删除数据、发送恶意邮件或执行转账。相比之下，写操作一旦执行就可能无法回退。因此在权限设计中，默认给 Agent 只读权限，所有写入操作都需要显式授权和人工审批。</div>
+    <summary>自测题 3：为什么说"只读优先"是最重要的权限原则？</summary>
+    <div class="answer">只读操作不会造成不可逆的损害。即使 Agent 被劫持，最多也只能读取数据（可通过 ACL 进一步限制范围），不会删除数据、发送恶意邮件或执行转账。相比之下，写操作一旦执行就可能无法回退。因此在权限设计中，默认给 Agent 只读权限，所有写入操作都需要显式授权和人工审批。</div>
   </details>
 </div>
 

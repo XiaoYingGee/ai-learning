@@ -4,7 +4,7 @@ description: "掌握文档分块的各种策略、向量数据库选型，以及
 ---
 
 :::tip[与其他章节的关联]
-- 分块大小需考虑模型的 Token 限制，参见 [ch01 Tokenization](/01-llm-basics/03-embedding-tokenization/)
+- 分块大小需考虑模型的 Token 限制，参见 [ch01 Tokenization](/01-llm-fundamentals/02-tokenization-embedding/)
 - 向量数据库是 [ch04-02 RAG 基础](/04-rag/02-rag-basics/) 中离线阶段的核心存储组件
 - LangChain 内置了多种 Text Splitter，参见 [ch05-01 LangChain](/05-frameworks/01-langchain-langgraph/)
 :::
@@ -157,24 +157,24 @@ Metadata 过滤的典型用途：
 - **chunk_size 单位混淆**：`chunk_size` 是字符数而非 Token 数。中文 1 字符 ≈ 1-2 Token，英文 1 Token ≈ 4 字符。建议同时检查 Token 数是否超出 Embedding 模型限制。
 - **忽略文档结构**：对 Markdown/HTML 文档不利用标题层级信息，导致一个 chunk 跨越多个不相关的章节。可用 `MarkdownHeaderTextSplitter` 按标题切分。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：递归分块为什么是最推荐的分块策略？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">它按优先级依次尝试多种分隔符（段落→换行→句子），尽量在自然语义边界切分，兼顾了块大小的一致性和语义的完整性。</div>
+    <summary>自测题 1：递归分块为什么是最推荐的分块策略？</summary>
+    <div class="answer">它按优先级依次尝试多种分隔符（段落→换行→句子），尽量在自然语义边界切分，兼顾了块大小的一致性和语义的完整性。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：chunk_overlap 的作用是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">让相邻块之间有重叠内容，避免重要信息恰好在切分边界被截断，保持上下文连贯性。</div>
+    <summary>自测题 2：chunk_overlap 的作用是什么？</summary>
+    <div class="answer">让相邻块之间有重叠内容，避免重要信息恰好在切分边界被截断，保持上下文连贯性。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：什么场景下应该选 pgvector 而不是 Pinecone？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">团队已有 PostgreSQL 基础设施、数据量中等、希望减少外部依赖、数据不能出境（合规要求）的场景。</div>
+    <summary>自测题 3：什么场景下应该选 pgvector 而不是 Pinecone？</summary>
+    <div class="answer">团队已有 PostgreSQL 基础设施、数据量中等、希望减少外部依赖、数据不能出境（合规要求）的场景。</div>
   </details>
 </div>
 

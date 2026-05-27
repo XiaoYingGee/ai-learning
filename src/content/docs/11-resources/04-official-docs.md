@@ -4,8 +4,8 @@ description: "AI Agent 开发相关的官方文档和 SDK 参考"
 ---
 
 :::tip[与其他章节的关联]
-- Anthropic Claude API / MCP 文档 → [ch05 Tool Use](/05-tool-use/) 和 [ch06 MCP](/06-mcp/)
-- LangChain / LangGraph 文档 → [ch02 Agent 设计模式](/02-patterns/) 的框架实现
+- Anthropic Claude API / MCP 文档 → [ch05 Tool Use](/03-tool-use/01-function-calling/) 和 [ch06 MCP](/03-tool-use/03-mcp/)
+- LangChain / LangGraph 文档 → [ch02 Agent 设计模式](/02-agent-patterns/01-what-is-agent/) 的框架实现
 - LlamaIndex 文档 → [ch04 RAG 深入](/04-rag/) 的工程化实践
 - 向量数据库文档 → [ch04 RAG](/04-rag/) 中的检索层选型
 :::

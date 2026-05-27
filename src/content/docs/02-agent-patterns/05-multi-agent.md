@@ -243,28 +243,28 @@ result = crew.kickoff()
 
 多 Agent 系统的最大陷阱是**过度工程**。如果一个任务可以用单 Agent + 好的 Prompt 完成，引入多 Agent 只会增加通信开销、调试难度和成本。经验法则：先用单 Agent 原型验证可行性，只有当你明确遇到以下问题时才考虑拆分为多 Agent——上下文窗口不够用、单次推理无法覆盖所有专业知识、或者需要并行执行独立子任务以提升速度。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：中心化和去中心化协作模式各自适合什么场景？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：中心化和去中心化协作模式各自适合什么场景？</summary>
+    <div class="answer">
       中心化适合大多数生产场景，因为控制流清晰、易于调试和监控。去中心化适合需要高可用和水平扩展的场景，如分布式任务处理。但去中心化的复杂性高，容易出现死循环或消息风暴，需要额外的协调机制。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：A2A 和 MCP 的区别是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：A2A 和 MCP 的区别是什么？</summary>
+    <div class="answer">
       MCP（Model Context Protocol）解决的是 Agent 与外部工具和数据源的连接问题——让 Agent 能调用搜索引擎、数据库等工具。A2A（Agent-to-Agent Protocol）解决的是 Agent 之间的互操作问题——让不同框架构建的 Agent 能够发现彼此、委托任务、交换结果。两者互补。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：多 Agent 系统的主要挑战有哪些？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：多 Agent 系统的主要挑战有哪些？</summary>
+    <div class="answer">
       1) 通信开销：Agent 间的消息传递增加延迟和成本；2) 一致性：共享状态的并发访问可能导致冲突；3) 调试困难：分布式系统的问题难以复现和定位；4) 错误传播：一个 Agent 的错误输出可能误导其他 Agent；5) 过度工程：很多任务不需要多 Agent，单 Agent 就够了。
     </div>
   </details>

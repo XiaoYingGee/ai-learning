@@ -249,24 +249,24 @@ if __name__ == "__main__":
 
 ## 自测问题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：chunk_overlap 的作用是什么？如果设为 0 会有什么问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">chunk_overlap 让相邻块有一部分重叠内容，确保跨块边界的信息不会丢失。设为 0 时，恰好在块边界处的完整语句会被切断，检索时可能找不到完整的相关信息。</div>
+    <summary>自测题 1：chunk_overlap 的作用是什么？如果设为 0 会有什么问题？</summary>
+    <div class="answer">chunk_overlap 让相邻块有一部分重叠内容，确保跨块边界的信息不会丢失。设为 0 时，恰好在块边界处的完整语句会被切断，检索时可能找不到完整的相关信息。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么要批量处理 Embedding 而不是逐条处理？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">API 调用有网络延迟开销。批量处理（一次发送 100 条）可以大幅减少 API 调用次数，降低延迟和成本。</div>
+    <summary>自测题 2：为什么要批量处理 Embedding 而不是逐条处理？</summary>
+    <div class="answer">API 调用有网络延迟开销。批量处理（一次发送 100 条）可以大幅减少 API 调用次数，降低延迟和成本。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：生成阶段的 System Prompt 中为什么强调"如果没有相关信息请如实说明"？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">防止 LLM 在参考资料中找不到答案时编造信息（幻觉）。明确指示 LLM 在信息不足时承认而不是臆测。</div>
+    <summary>自测题 3：生成阶段的 System Prompt 中为什么强调"如果没有相关信息请如实说明"？</summary>
+    <div class="answer">防止 LLM 在参考资料中找不到答案时编造信息（幻觉）。明确指示 LLM 在信息不足时承认而不是臆测。</div>
   </details>
 </div>
 

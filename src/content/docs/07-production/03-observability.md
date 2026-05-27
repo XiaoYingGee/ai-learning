@@ -178,24 +178,24 @@ P50 表示 50% 的请求在该延迟内完成（即中位数），P95/P99 分别
 
 ## 自测问题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么传统的日志方式不足以调试 Agent？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">Agent 的执行路径是动态的、不确定的。传统日志记录线性的事件序列，无法体现 Agent 决策的分支、循环和嵌套关系。Tracing 的树状结构能完整表达这些关系。</div>
+    <summary>自测题 1：为什么传统的日志方式不足以调试 Agent？</summary>
+    <div class="answer">Agent 的执行路径是动态的、不确定的。传统日志记录线性的事件序列，无法体现 Agent 决策的分支、循环和嵌套关系。Tracing 的树状结构能完整表达这些关系。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：结构化日志相比自由文本日志有什么优势？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">结构化日志（JSON）可以被程序自动解析、过滤和聚合。比如你可以轻松查询"所有 tool_call 事件中 duration_ms > 1000 的记录"，自由文本日志做不到。</div>
+    <summary>自测题 2：结构化日志相比自由文本日志有什么优势？</summary>
+    <div class="answer">结构化日志（JSON）可以被程序自动解析、过滤和聚合。比如你可以轻松查询"所有 tool_call 事件中 duration_ms > 1000 的记录"，自由文本日志做不到。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么需要监控"Agent 循环次数"这个指标？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">循环次数反映了 Agent 的效率。如果一个简单问题需要 10+ 次 LLM 调用才能回答，说明 Prompt 设计有问题或 Agent 陷入了低效的推理模式，需要优化。</div>
+    <summary>自测题 3：为什么需要监控"Agent 循环次数"这个指标？</summary>
+    <div class="answer">循环次数反映了 Agent 的效率。如果一个简单问题需要 10+ 次 LLM 调用才能回答，说明 Prompt 设计有问题或 Agent 陷入了低效的推理模式，需要优化。</div>
   </details>
 </div>
 

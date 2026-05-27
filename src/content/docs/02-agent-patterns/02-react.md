@@ -205,28 +205,28 @@ Step 7+:  可能偏离主题或循环
 ReAct 的 Action 阶段依赖外部工具调用。第 3 章详细介绍了工具使用（Tool Use）的实现机制，包括 Function Calling、MCP 协议等——这些是 ReAct Agent 在生产环境中执行行动的基础设施。参见 [第 3 章：工具使用与 MCP](/03-tool-use/)。
 :::
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：ReAct 相比纯 CoT 的核心优势是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：ReAct 相比纯 CoT 的核心优势是什么？</summary>
+    <div class="answer">
       ReAct 引入了 Action 阶段，使模型能调用外部工具获取实时信息，而非仅依赖训练数据进行推理。这解决了 CoT 容易产生幻觉的问题——模型可以通过搜索、计算等工具验证自己的推理。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：ReAct 循环中 Thought 阶段的作用是什么？能否跳过？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：ReAct 循环中 Thought 阶段的作用是什么？能否跳过？</summary>
+    <div class="answer">
       Thought 阶段让模型在行动前先进行推理和规划，决定下一步应该做什么、为什么要做。如果跳过 Thought 直接行动（Action-only），模型会缺乏规划能力，可能盲目调用工具或遗漏重要步骤。论文实验表明，去掉 Thought 会显著降低效果。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：现代 Agent 框架如何改进了原始 ReAct 的格式依赖问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：现代 Agent 框架如何改进了原始 ReAct 的格式依赖问题？</summary>
+    <div class="answer">
       现代框架使用结构化的工具调用协议（如 OpenAI Function Calling、Claude Tool Use），模型直接输出 JSON 格式的工具调用请求，而非在自然语言中嵌入特定格式。这消除了格式解析错误，使工具调用更可靠。
     </div>
   </details>

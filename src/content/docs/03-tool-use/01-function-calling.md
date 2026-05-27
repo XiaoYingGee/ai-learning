@@ -126,28 +126,28 @@ Function Calling 是 Agent 使用工具的底层机制。在 [第 2 章：ReAct 
 
 ---
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Function Calling 中，LLM 实际做了什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Function Calling 中，LLM 实际做了什么？</summary>
+    <div class="answer">
       LLM 生成结构化的 JSON（函数名 + 参数），而不是真正执行函数。它更像是一个"指挥官"——告诉你的应用代码该调用什么、传什么参数，但自己不动手。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：OpenAI 和 Claude 在工具结果回传上有什么区别？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：OpenAI 和 Claude 在工具结果回传上有什么区别？</summary>
+    <div class="answer">
       OpenAI 使用独立的 <code>role: "tool"</code> 消息回传结果，Claude 将 <code>tool_result</code> 嵌套在 <code>user</code> 消息的 content block 中。这意味着在 Claude 的 API 中，工具结果是用户消息的一部分，而在 OpenAI 中是一个独立的消息角色。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么说工具描述比工具名称更重要？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：为什么说工具描述比工具名称更重要？</summary>
+    <div class="answer">
       LLM 依赖 description 来理解工具的用途、适用场景和使用时机，name 只是标识符。类比：你去一家餐厅，菜名叫"狮子头"你未必知道是什么，但如果描述写了"红烧大肉丸，肥瘦相间，口感鲜嫩"，你立刻就知道要不要点。
     </div>
   </details>

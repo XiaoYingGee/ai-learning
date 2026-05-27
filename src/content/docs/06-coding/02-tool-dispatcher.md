@@ -10,7 +10,7 @@ description: "设计一个完整的工具调用调度器：注册、校验、并
 本文实现一个生产级的 Tool Dispatcher，支持 JSON Schema 注册、参数校验、并行调用和超时处理。
 
 :::tip[理论回顾：Function Calling]
-Tool Dispatcher 是 [第三章 Function Calling](/03-model-api/03-function-calling/) 的工程落地。第三章讲解了模型如何声明和调用工具的协议；本章把协议层之上的**注册、校验、超时、并行**等生产关切全部补齐。
+Tool Dispatcher 是 [第三章 Function Calling](/03-tool-use/01-function-calling/) 的工程落地。第三章讲解了模型如何声明和调用工具的协议；本章把协议层之上的**注册、校验、超时、并行**等生产关切全部补齐。
 :::
 
 ## 完整实现
@@ -234,24 +234,24 @@ asyncio.run(main())
 
 ## 自测问题
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：为什么同步工具需要用 run_in_executor 包装？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">因为同步函数会阻塞事件循环（event loop），导致其他并行任务无法执行。run_in_executor 把同步函数放到线程池中运行，不会阻塞事件循环。</div>
+    <summary>自测题 1：为什么同步工具需要用 run_in_executor 包装？</summary>
+    <div class="answer">因为同步函数会阻塞事件循环（event loop），导致其他并行任务无法执行。run_in_executor 把同步函数放到线程池中运行，不会阻塞事件循环。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：JSON Schema 参数校验发生在什么阶段？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">在工具实际执行之前。先校验参数格式是否合法，通过后才调用 handler 函数。这样可以避免将非法参数传入工具造成不可预期的错误。</div>
+    <summary>自测题 2：JSON Schema 参数校验发生在什么阶段？</summary>
+    <div class="answer">在工具实际执行之前。先校验参数格式是否合法，通过后才调用 handler 函数。这样可以避免将非法参数传入工具造成不可预期的错误。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：如果并行执行 3 个工具，其中 1 个超时了，另外 2 个会受影响吗？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">不会。asyncio.gather 中每个任务是独立的，一个超时不影响其他任务的正常完成。每个任务有自己独立的错误处理。</div>
+    <summary>自测题 3：如果并行执行 3 个工具，其中 1 个超时了，另外 2 个会受影响吗？</summary>
+    <div class="answer">不会。asyncio.gather 中每个任务是独立的，一个超时不影响其他任务的正常完成。每个任务有自己独立的错误处理。</div>
   </details>
 </div>
 

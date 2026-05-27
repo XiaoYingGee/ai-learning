@@ -4,8 +4,8 @@ description: "理解 Agentic RAG 与传统 RAG 的区别，掌握路由式和迭
 ---
 
 :::tip[与其他章节的关联]
-- Agentic RAG 直接应用 [ch02 Agent 模式](/02-agent-basics/02-agent-patterns/) 中的 ReAct 和规划模式来驱动检索决策
-- 路由式和迭代式 RAG 是 [ch02 编排模式](/02-agent-basics/02-agent-patterns/) 在检索场景的具体应用
+- Agentic RAG 直接应用 [ch02 Agent 模式](/02-agent-patterns/01-what-is-agent/) 中的 ReAct 和规划模式来驱动检索决策
+- 路由式和迭代式 RAG 是 [ch02 编排模式](/02-agent-patterns/01-what-is-agent/) 在检索场景的具体应用
 - 多个框架已内置 Agentic RAG 支持，参见 [ch05 LangChain](/05-frameworks/01-langchain-langgraph/) 和 [ch05 Claude Agent SDK](/05-frameworks/02-claude-agent-sdk/)
 :::
 
@@ -152,58 +152,58 @@ def agentic_rag(question: str, max_iterations: int = 3) -> str:
 
 Agentic RAG 是 2025-2026 年 AI Engineer 面试的热门话题：
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Agentic RAG 与传统 RAG 的本质区别是什么？</div>
+<div class="card-interview">
+  <div class="question">Q: Agentic RAG 与传统 RAG 的本质区别是什么？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">决策权从固定流程转移到 Agent。传统 RAG 每次都走「检索→生成」的固定管线；Agentic RAG 由 Agent 自主决定是否检索、检索哪个数据源、结果是否足够、是否需要重新检索。</div>
+    <summary>查看答案</summary>
+    <div class="answer">决策权从固定流程转移到 Agent。传统 RAG 每次都走「检索→生成」的固定管线；Agentic RAG 由 Agent 自主决定是否检索、检索哪个数据源、结果是否足够、是否需要重新检索。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 何时使用 Agentic RAG 而非传统 RAG？</div>
+<div class="card-interview">
+  <div class="question">Q: 何时使用 Agentic RAG 而非传统 RAG？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">多数据源、查询复杂度变化大、需要多步推理的场景。如果查询模式单一且数据源固定，传统 RAG 更简单可靠。</div>
+    <summary>查看答案</summary>
+    <div class="answer">多数据源、查询复杂度变化大、需要多步推理的场景。如果查询模式单一且数据源固定，传统 RAG 更简单可靠。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Agentic RAG 的成本如何权衡？</div>
+<div class="card-interview">
+  <div class="question">Q: Agentic RAG 的成本如何权衡？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">Agentic RAG 的 LLM 调用次数更多（路由判断、结果评估、查询改写），需要考虑延迟和成本。可通过设置最大迭代次数、使用小模型做路由/评估来控制。</div>
+    <summary>查看答案</summary>
+    <div class="answer">Agentic RAG 的 LLM 调用次数更多（路由判断、结果评估、查询改写），需要考虑延迟和成本。可通过设置最大迭代次数、使用小模型做路由/评估来控制。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 如何评估 Agentic RAG 的效果？</div>
+<div class="card-interview">
+  <div class="question">Q: 如何评估 Agentic RAG 的效果？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">分环节评估：检索用 Recall@K / MRR / NDCG（参见 <a href="/04-rag/04-advanced-rag/">ch04-04 评估指标</a>），生成用 Answer Relevancy / Faithfulness，整体用端到端准确率。</div>
+    <summary>查看答案</summary>
+    <div class="answer">分环节评估：检索用 Recall@K / MRR / NDCG（参见 <a href="/04-rag/04-advanced-rag/">ch04-04 评估指标</a>），生成用 Answer Relevancy / Faithfulness，整体用端到端准确率。</div>
   </details>
 </div>
 
 ---
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Agentic RAG 比传统 RAG 多了哪些决策能力？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">是否需要检索、检索哪个数据源、检索结果是否足够、是否需要改写查询重新检索。</div>
+    <summary>自测题 1：Agentic RAG 比传统 RAG 多了哪些决策能力？</summary>
+    <div class="answer">是否需要检索、检索哪个数据源、检索结果是否足够、是否需要改写查询重新检索。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：路由式 RAG 和迭代式 RAG 分别解决什么问题？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">路由式解决「查哪里」的问题（多数据源选择）；迭代式解决「查到没有」的问题（结果质量评估和反复检索）。</div>
+    <summary>自测题 2：路由式 RAG 和迭代式 RAG 分别解决什么问题？</summary>
+    <div class="answer">路由式解决「查哪里」的问题（多数据源选择）；迭代式解决「查到没有」的问题（结果质量评估和反复检索）。</div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：Agentic RAG 的主要缺点是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">LLM 调用次数增多导致延迟增加和成本上升；Agent 的决策本身可能出错（如错误路由、不必要的重复检索）。</div>
+    <summary>自测题 3：Agentic RAG 的主要缺点是什么？</summary>
+    <div class="answer">LLM 调用次数增多导致延迟增加和成本上升；Agent 的决策本身可能出错（如错误路由、不必要的重复检索）。</div>
   </details>
 </div>
 

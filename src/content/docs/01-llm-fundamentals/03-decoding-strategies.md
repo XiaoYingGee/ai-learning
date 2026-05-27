@@ -146,30 +146,30 @@ Step 2:  "天气" → "天气很"(0.4×0.5) / "天气不"(0.4×0.3)
 
 **注意**：不同 API 的参数组合方式不同。OpenAI 建议只调 Temperature 或 Top-p 之一，不要同时调。Claude API 默认 Temperature=1，Top-p=0.999。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Temperature=0 和 Greedy Decoding 有什么关系？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Temperature=0 和 Greedy Decoding 有什么关系？</summary>
+    <div class="answer">
       Temperature=0 时，Softmax 输出趋近 one-hot 分布——概率最高的 token 概率趋近 1，其余趋近 0，效果完全等同于 Greedy Decoding（每步选概率最大的 token）。实际实现中 T=0 通常直接用 argmax 跳过 Softmax 计算。<br/><br/>
       可以这样理解：Temperature 就像一个"冒险开关"。T=0 是最保守的设定，模型永远选最有把握的答案；T 越高，模型越愿意尝试低概率但可能更有创意的选项。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：为什么 Top-p 比 Top-k 更优？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：为什么 Top-p 比 Top-k 更优？</summary>
+    <div class="answer">
       Top-k 使用固定的候选数量（如 k=50），无法适应不同位置上概率分布的差异。比如在"中华人民共和____"这个位置，合理的下一个字只有"国"，但 k=50 会强行保留 50 个候选，引入大量噪声。<br/><br/>
       Top-p 根据累计概率动态调整候选集大小：模型很确信时（概率集中在少数 token 上），候选集自动缩小到 1-2 个；模型不确定时（概率分散），候选集自动扩大。这种自适应机制让采样质量更稳定，是目前大多数 API 的默认策略。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：为什么代码生成任务通常用低 Temperature？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：为什么代码生成任务通常用低 Temperature？</summary>
+    <div class="answer">
       代码有严格的语法规则，一个错误的 token（比如少一个括号、用错一个关键字）就可能导致整个程序无法运行。低 Temperature 让模型更倾向于选择概率最高（最可能正确）的 token，减少随机性带来的语法错误。<br/><br/>
       此外，代码任务通常有明确的"正确答案"，不需要创造性——<code>for i in range(10)</code> 就是比 <code>for i in range(9+1)</code> 更好的写法。而创意写作则相反，需要高 Temperature 来避免千篇一律的表达。
     </div>

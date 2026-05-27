@@ -126,7 +126,7 @@ if __name__ == "__main__":
 ```
 
 :::tip[与其他章节的关联]
-MCP 为多 Agent 系统提供了工具共享的基础设施。在 [第 2 章：Multi-Agent 模式](/02-agent-patterns/04-multi-agent/) 中，多个 Agent 需要访问共同的工具和数据源——MCP 让这些工具只需实现一次，所有 Agent 都能通过标准协议调用。
+MCP 为多 Agent 系统提供了工具共享的基础设施。在 [第 2 章：Multi-Agent 模式](/02-agent-patterns/05-multi-agent/) 中，多个 Agent 需要访问共同的工具和数据源——MCP 让这些工具只需实现一次，所有 Agent 都能通过标准协议调用。
 :::
 
 安装与配置：
@@ -148,28 +148,28 @@ pip install mcp
 
 ---
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：MCP 中 Host、Client、Server 分别是什么角色？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：MCP 中 Host、Client、Server 分别是什么角色？</summary>
+    <div class="answer">
       Host 是用户使用的应用（如 Claude Desktop），Client 是 Host 内部管理与 Server 通信的组件（每个 Server 对应一个 Client 实例），Server 是提供工具/资源/提示的外部服务。类比：Host 是办公室，Client 是办公室里的电话机，Server 是电话另一端的服务商。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：stdio 和 Streamable HTTP 两种 Transport 各适用什么场景？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：stdio 和 Streamable HTTP 两种 Transport 各适用什么场景？</summary>
+    <div class="answer">
       stdio 适合本地工具（Server 作为子进程运行在同一台机器上，通过标准输入输出通信，零网络开销），Streamable HTTP 适合远程部署的 Server（需要跨网络通信，支持多客户端并发连接）。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：MCP Server 的三种能力是什么？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：MCP Server 的三种能力是什么？</summary>
+    <div class="answer">
       Tools（可执行操作，如查询数据库）、Resources（可读取数据，如文件内容）、Prompts（预定义提示模板，如代码审查模板）。三者分别对应"做事"、"读数据"、"给建议"。
     </div>
   </details>

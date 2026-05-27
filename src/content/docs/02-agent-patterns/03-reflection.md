@@ -205,28 +205,28 @@ Step 5: Final Answer
 
 Reflection 模式虽然强大，但也有容易踩的坑。首先是**过度反思**：如果 Reflector 的标准设得太高，Agent 会陷入无限修改的循环，每次"改进"反而引入新问题。实践中应设置明确的退出条件（如最多 3 轮反思，或评分连续两轮无提升则停止）。其次是**反思质量取决于评估能力**：如果 LLM 本身无法识别输出中的错误（比如专业领域的事实性错误），那么 Reflection 就是"盲人摸象"。这种情况下，基于规则的验证器（代码测试、格式检查）比 LLM 自评更可靠。
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Reflection 和简单的"重试"有什么区别？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Reflection 和简单的"重试"有什么区别？</summary>
+    <div class="answer">
       重试只是重新执行同样的操作，期望随机性带来不同结果。Reflection 则是有针对性的改进——先分析失败原因，生成具体的改进建议，然后基于这些建议修正输出。Reflection 保留了"经验教训"，避免重犯同样的错误。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Reflexion 为什么不需要更新模型权重就能"学习"？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：Reflexion 为什么不需要更新模型权重就能"学习"？</summary>
+    <div class="answer">
       Reflexion 把学到的经验以自然语言形式存储在外部记忆中（而非模型参数中）。在下一次尝试时，这些经验作为上下文输入给 LLM，LLM 通过 in-context learning 利用这些经验改进行为。这是一种"推理时学习"而非"训练时学习"。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：在什么场景下 Reflection 模式最有价值？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：在什么场景下 Reflection 模式最有价值？</summary>
+    <div class="answer">
       1) 需要高质量输出的场景（如代码生成、技术写作）；2) 有客观评估标准的任务（如代码有测试用例、数学有标准答案）；3) 错误成本高的场景（如自动化部署脚本）。对于简单的问答或分类任务，Reflection 的额外开销通常不值得。
     </div>
   </details>

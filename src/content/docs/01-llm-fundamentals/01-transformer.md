@@ -133,70 +133,70 @@ RoPE（Rotary Position Embedding，旋转位置编码）通过对向量施加旋
 
 ## 面试考点
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: 为什么 Attention 公式要除以 $\sqrt{d_k}$？</div>
+<div class="card-interview">
+  <div class="question">Q: 为什么 Attention 公式要除以 $\sqrt{d_k}$？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">
+    <summary>查看答案</summary>
+    <div class="answer">
       当向量维度 $d_k$ 较大时，Q 和 K 的点积结果会变得很大（方差约为 $d_k$）。过大的值输入 Softmax 后会导致梯度极小（接近 one-hot 分布），模型难以学习。除以 $\sqrt{d_k}$ 将方差归一化到 1，让 Softmax 的梯度保持在合理范围内。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Multi-Head Attention 的作用是什么？</div>
+<div class="card-interview">
+  <div class="question">Q: Multi-Head Attention 的作用是什么？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">
+    <summary>查看答案</summary>
+    <div class="answer">
       单个 Attention 只能学习一种关联模式。Multi-Head 让模型在不同子空间中同时捕捉不同类型的依赖关系：比如 Head 1 学语法依赖（主语-谓语），Head 2 学语义关联（同义词），Head 3 学指代关系（"他"指谁）。最后将所有 Head 的输出拼接起来，获得更丰富的表示。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Decoder 中的 Masked Attention 是什么？</div>
+<div class="card-interview">
+  <div class="question">Q: Decoder 中的 Masked Attention 是什么？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">
+    <summary>查看答案</summary>
+    <div class="answer">
       在训练时，Decoder 需要同时处理整个目标序列来提高效率。但生成第 $i$ 个 token 时，模型不应该看到第 $i+1$ 及之后的 token（否则就是"作弊"）。Masked Attention 通过将未来位置的注意力权重设为 $-\infty$（Softmax 后变为 0）来实现这一点，确保每个位置只能关注它之前的 token。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #f97316;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
-  <div style="font-weight:bold;color:#f97316;margin-bottom:.5rem;">Q: Transformer 的计算复杂度是多少？</div>
+<div class="card-interview">
+  <div class="question">Q: Transformer 的计算复杂度是多少？</div>
   <details>
-    <summary style="cursor:pointer;color:#888;font-size:.9rem;">查看答案</summary>
-    <div style="margin-top:.5rem;font-size:.9rem;">
+    <summary>查看答案</summary>
+    <div class="answer">
       Self-Attention 的复杂度是 $O(n^2 d)$，其中 $n$ 是序列长度，$d$ 是向量维度。$n^2$ 来自每个 token 都要计算与所有其他 token 的注意力得分。这也是为什么长序列（如 128K tokens）需要 FlashAttention、稀疏 Attention 等优化技术来降低计算和显存开销。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 1：Self-Attention 中 Q、K、V 分别代表什么？为什么需要三个不同的矩阵？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 1：Self-Attention 中 Q、K、V 分别代表什么？为什么需要三个不同的矩阵？</summary>
+    <div class="answer">
       <strong>Q（Query）</strong>代表"我在找什么"——当前 token 的查询意图。<strong>K（Key）</strong>代表"我能提供什么"——每个 token 的可匹配特征。<strong>V（Value）</strong>代表"我的实际内容"。Q 与 K 的点积决定注意力权重，权重再作用于 V 得到最终输出。<br/><br/>
       如果 $Q=K=V$（即用同一个矩阵），模型只能做简单的自相关计算，表达能力大大受限。使用三个独立的线性变换，让模型可以在不同的子空间中分别学习"如何匹配"和"输出什么"，极大增强了灵活性。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 2：Transformer 为什么能并行训练而 RNN 不能？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 2：Transformer 为什么能并行训练而 RNN 不能？</summary>
+    <div class="answer">
       RNN 的隐藏状态 $h_t$ 依赖于 $h_{t-1}$，形成严格的顺序依赖链——必须算完第 1 步才能算第 2 步。而 Transformer 的 Self-Attention 通过矩阵运算一次性计算所有位置之间的关系，没有顺序依赖。<br/><br/>
       打个比方：RNN 像流水线工人，每个人必须等上一个人做完才能开始；Transformer 像一群人同时开工，各做各的。这使得 Transformer 能充分利用 GPU 的并行计算能力，训练速度快数倍到数十倍。
     </div>
   </details>
 </div>
 
-<div style="border-left:4px solid #60a5fa;padding:.8rem 1.2rem;margin:.8rem 0;background:rgba(255,255,255,0.03);border-radius:0 8px 8px 0;">
+<div class="card-quiz">
   <details>
-    <summary style="font-weight:bold;color:#60a5fa;cursor:pointer;">自测题 3：如果去掉 Position Encoding，Transformer 会怎样？</summary>
-    <div style="margin-top:.8rem;font-size:.9rem;">
+    <summary>自测题 3：如果去掉 Position Encoding，Transformer 会怎样？</summary>
+    <div class="answer">
       Transformer 会变成一个"词袋模型"（Bag of Words）——它能看到句子里有哪些词，但不知道它们的顺序。"猫追狗"和"狗追猫"会被视为完全相同的输入，因为 Attention 本身是排列不变的（permutation invariant）。<br/><br/>
       Position Encoding 注入了位置信息，让模型知道每个 token 在序列中的位置。没有它，模型无法理解语序、语法结构和指代关系，生成的文本也会丧失连贯性。
     </div>
