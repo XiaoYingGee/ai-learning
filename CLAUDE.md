@@ -25,7 +25,8 @@ src/content/docs/
 ├── 08-security/                 # 第八章：安全
 ├── 09-system-design/            # 第九章：系统设计题
 ├── 10-interview/                # 第十章：面试冲刺
-└── 11-resources/                # 第十一章：推荐课程与资源
+├── 11-resources/                # 第十一章：推荐课程与资源
+└── 12-self-evolving/            # 第十二章：Agent 自进化
 ```
 
 ## 文章格式规范
