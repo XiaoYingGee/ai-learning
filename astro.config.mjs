@@ -72,6 +72,10 @@ export default defineConfig({
 					label: '第 11 章：推荐资源',
 					items: [{ autogenerate: { directory: '11-resources' } }],
 				},
+				{
+					label: '第 12 章：Agent 自进化',
+					items: [{ autogenerate: { directory: '12-self-evolving' } }],
+				},
 			],
 		}),
 	],
